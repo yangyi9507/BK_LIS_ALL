@@ -40,7 +40,7 @@ namespace BK_LIS.Base
         #region 选中行展示数据
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (this.dataGridView1.SelectionMode != DataGridViewSelectionMode.FullColumnSelect)
+            if (this.dataGridView1.SelectionMode != DataGridViewSelectionMode.FullColumnSelect && dataGridView1.CurrentRow != null)
             {
                 int index = dataGridView1.CurrentRow.Index; //获取选中行的行号
                 uitextBox1.Text = dataGridView1.Rows[index].Cells[1].Value.ToString();

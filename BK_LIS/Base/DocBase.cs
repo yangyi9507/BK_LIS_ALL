@@ -52,7 +52,7 @@ namespace BK_LIS.Base
         {
             if (this.dataGridView1.SelectionMode != DataGridViewSelectionMode.FullColumnSelect)
             {
-                if (dataGridView1.CurrentRow == null) 
+                if (dataGridView1.CurrentRow != null) 
                 {
                     int index = dataGridView1.CurrentRow.Index; //获取选中行的行号
                     uitextBox1.Text = dataGridView1.Rows[index].Cells[1].Value.ToString();

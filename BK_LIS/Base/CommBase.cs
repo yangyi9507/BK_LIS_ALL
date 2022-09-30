@@ -39,7 +39,7 @@ namespace BK_LIS.Base
         #region 选中行展示数据
         private void DataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            if (this.uiDataGridView1.SelectionMode != DataGridViewSelectionMode.FullColumnSelect)
+            if (this.uiDataGridView1.SelectionMode != DataGridViewSelectionMode.FullColumnSelect && uiDataGridView1.CurrentRow != null)
             {
                 int index = uiDataGridView1.CurrentRow.Index; //获取选中行的行号
                 strDicCode = uiDataGridView1.Rows[index].Cells[0].Value.ToString();//接收字典编码查询对应字典内容
@@ -64,7 +64,7 @@ namespace BK_LIS.Base
         #region 选中行展示数据
         private void DataGridView2_SelectionChanged(object sender, EventArgs e)
         {
-            if (this.uiDataGridView1.SelectionMode != DataGridViewSelectionMode.FullColumnSelect)
+            if (this.uiDataGridView1.SelectionMode != DataGridViewSelectionMode.FullColumnSelect && uiDataGridView2.CurrentRow != null)
             {
                 int index = uiDataGridView2.CurrentRow.Index; //获取选中行的行号
                 ID = int.Parse(uiDataGridView2.Rows[index].Cells[0].Value.ToString());//用于后续的更新删除
