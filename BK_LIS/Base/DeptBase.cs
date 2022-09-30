@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace BK_LIS.Base
 {
-    public partial class DeptBase : UIForm
+    public partial class DeptBase : UIPage
     {
-        public string ID = "";// 初始化科室ID
+        public int ID = 0;// 初始化科室ID
         public DeptBase()
         {
             InitializeComponent();
@@ -48,8 +48,7 @@ namespace BK_LIS.Base
                 uiTextBox3.Text = dataGridView1.Rows[index].Cells[3].Value.ToString();
                 uiTextBox4.Text = dataGridView1.Rows[index].Cells[4].Value.ToString();
                 
-                ID = dataGridView1.Rows[index].Cells[0].Value.ToString();//接收科室ID用于后续的更新
-
+                ID = int.Parse(dataGridView1.Rows[index].Cells[0].Value.ToString());//接收科室ID用于后续的更新
             };
         }
         #endregion
@@ -65,7 +64,7 @@ namespace BK_LIS.Base
             Maticsoft.DAL.Dept deptDal = new Maticsoft.DAL.Dept();  //声明对象
             Maticsoft.Model.Dept dept = new Maticsoft.Model.Dept
             {
-                ID = int.Parse(ID),
+                ID = ID,
                 DeptID = uitextBox1.Text,
                 DeptName = uiTextBox2.Text,
                 DeptNamePy = uiTextBox3.Text,
@@ -75,13 +74,12 @@ namespace BK_LIS.Base
             bool flg  = deptDal.Update(dept);//更新操作
             if (flg)
             {
+                UIMessageTip.Show(AppCode.UPDATE_SUCCESSS);
                 DataReSet();
             }
             else {
-                
+                UIMessageTip.Show(AppCode.UPDATE_ERROR);
             }
-
-
 
         }
         #endregion
@@ -102,9 +100,60 @@ namespace BK_LIS.Base
         }
         #endregion
 
+        #region 科室新增
         private void Button1_Click(object sender, EventArgs e)
         {
+            Maticsoft.DAL.Dept deptDal = new Maticsoft.DAL.Dept();  //声明对象
 
+            #region 循环判断ID是否存在
+            if (string.IsNullOrEmpty(uitextBox1.Text)) { UIMessageTip.Show(AppCode.EMPTIY_ERROR); return; }
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                if (uitextBox1.Text == dataGridView1.Rows[i].Cells[0].Value.ToString()) 
+                {
+                    UIMessageTip.Show(AppCode.EXIT_ERROR);
+                    return;
+                }
+            }
+            #endregion
+
+            Maticsoft.Model.Dept dept = new Maticsoft.Model.Dept
+            {
+                DeptID = uitextBox1.Text,
+                DeptName = uiTextBox2.Text,
+                DeptNamePy = uiTextBox3.Text,
+                DeptMemo = uiTextBox4.Text
+            };
+
+            bool flg = deptDal.Add(dept);
+            if (flg)
+            {
+                UIMessageTip.Show(AppCode.INSERT_SUCCESSS);
+                DataReSet();
+            }
+            else
+            {
+                UIMessageTip.Show(AppCode.INSERT_ERROR);
+            }
         }
+        #endregion
+
+        #region 科室删除
+        private void uiSymbolButton2_Click(object sender, EventArgs e)
+        {
+            Maticsoft.DAL.Dept deptDal = new Maticsoft.DAL.Dept();  //声明对象
+
+            bool flg = deptDal.Delete(ID);
+            if (flg)
+            {
+                UIMessageTip.Show(AppCode.DELETE_SUCCESSS);
+                DataReSet();
+            }
+            else
+            {
+                UIMessageTip.Show(AppCode.DELETE_ERROR);
+            }
+        }
+        #endregion
     }
 }

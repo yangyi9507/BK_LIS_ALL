@@ -9,11 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BK_LIS
+namespace BK_LIS.Base
 {
-    public partial class ReportMain : UIPage
+    public partial class DicItemModel : UIPage
     {
-        public ReportMain()
+        public DicItemModel()
         {
             InitializeComponent();
         }

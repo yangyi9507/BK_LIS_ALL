@@ -75,6 +75,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppCode.cs" />
+    <Compile Include="Base\CommBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\CommBase.Designer.cs">
+      <DependentUpon>CommBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Base\DicItemModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\DicItemModel.Designer.cs">
+      <DependentUpon>DicItemModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\DocBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +100,19 @@
     <Compile Include="Base\DeptBase.Designer.cs">
       <DependentUpon>DeptBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\TestListBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\TestListBase.Designer.cs">
+      <DependentUpon>TestListBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorCode.cs" />
+    <Compile Include="LisMainFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LisMainFrm.Designer.cs">
+      <DependentUpon>LisMainFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,11 +121,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Base\CommBase.resx">
+      <DependentUpon>CommBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\DicItemModel.resx">
+      <DependentUpon>DicItemModel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Base\DocBase.resx">
       <DependentUpon>DocBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\DeptBase.resx">
       <DependentUpon>DeptBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\TestListBase.resx">
+      <DependentUpon>TestListBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LisMainFrm.resx">
+      <DependentUpon>LisMainFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportMain.resx">
       <DependentUpon>ReportMain.cs</DependentUpon>

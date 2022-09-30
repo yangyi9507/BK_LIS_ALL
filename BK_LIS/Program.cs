@@ -18,8 +18,9 @@ namespace BK_LIS
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new ReportMain());
-            Application.Run(new DeptBase());
+            //Application.Run(new DeptBase());
             //Application.Run(new DocBase());
+            Application.Run(new LisMainFrm());
         }
     }
 }
