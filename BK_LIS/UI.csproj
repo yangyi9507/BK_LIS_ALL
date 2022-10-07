@@ -82,6 +82,18 @@
     <Compile Include="Base\CommBase.Designer.cs">
       <DependentUpon>CommBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\SampleClassBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\SampleClassBase.Designer.cs">
+      <DependentUpon>SampleClassBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Base\ItemBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Base\ItemBase.Designer.cs">
+      <DependentUpon>ItemBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Base\DicItemModel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +135,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Base\CommBase.resx">
       <DependentUpon>CommBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\SampleClassBase.resx">
+      <DependentUpon>SampleClassBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Base\ItemBase.resx">
+      <DependentUpon>ItemBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Base\DicItemModel.resx">
       <DependentUpon>DicItemModel.cs</DependentUpon>

@@ -16,6 +16,21 @@ namespace BK_LIS
         public ReportMain()
         {
             InitializeComponent();
+
+            GetItemClassName();//初始化获取项目大类
         }
+
+        #region 获取项目大类
+        public void GetItemClassName() 
+        {
+            Maticsoft.BLL.testlist testlist = new Maticsoft.BLL.testlist();  //声明对象                      
+            uiComboBox1.DataSource = testlist.GetDicCode().Tables[0];//赋值
+
+            uiComboBox1.DisplayMember = "ItemClassName";
+            uiComboBox1.ValueMember = "ItemClassCode";
+
+            //uiComboBox1.SelectedValue = dataGridView1.Rows[0].Cells[3].Value.ToString();
+        }
+        #endregion
     }
 }

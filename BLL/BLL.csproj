@@ -110,6 +110,9 @@
     <Compile Include="classtype.cs" />
     <Compile Include="dept.cs" />
     <Compile Include="doctor.cs" />
+    <Compile Include="item.cs" />
+    <Compile Include="sampleclass.cs" />
+    <Compile Include="testlist.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

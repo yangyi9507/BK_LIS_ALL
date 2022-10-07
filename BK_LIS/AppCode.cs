@@ -20,5 +20,8 @@ namespace BK_LIS
 
         public static readonly string EXIT_ERROR = "ID已存在！";
         public static readonly string EMPTIY_ERROR = "ID不允许为空！";
+
+        public static readonly string NO_ERROR = "序号只能为数字！";
+                
     }
 }

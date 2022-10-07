@@ -127,6 +127,9 @@
     <Compile Include="classtype.cs" />
     <Compile Include="dept.cs" />
     <Compile Include="doctor.cs" />
+    <Compile Include="item.cs" />
+    <Compile Include="sampleclass.cs" />
+    <Compile Include="testlist.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

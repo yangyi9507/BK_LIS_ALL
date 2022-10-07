@@ -32,8 +32,10 @@ namespace BK_LIS
         private void uiHeaderButton6_Click(object sender, EventArgs e)
         {
             uiTabControl1.TabPages.Clear();
-            AddPage(new TestListBase());
+            AddPage(new ItemBase());
+            AddPage(new SampleClassBase());
             AddPage(new DicItemModel());
+            AddPage(new TestListBase());
             AddPage(new DeptBase());
             AddPage(new DocBase());
             AddPage(new CommBase());           

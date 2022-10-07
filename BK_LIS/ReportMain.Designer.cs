@@ -50,7 +50,6 @@ namespace BK_LIS
             this.uiTextBox13 = new Sunny.UI.UITextBox();
             this.uiLabel17 = new Sunny.UI.UILabel();
             this.uiTextBox12 = new Sunny.UI.UITextBox();
-            this.uiTextBox10 = new Sunny.UI.UITextBox();
             this.uiLabel18 = new Sunny.UI.UILabel();
             this.uiLabel19 = new Sunny.UI.UILabel();
             this.uiLabel16 = new Sunny.UI.UILabel();
@@ -90,6 +89,7 @@ namespace BK_LIS
             this.uiButton1 = new Sunny.UI.UIButton();
             this.uiButton2 = new Sunny.UI.UIButton();
             this.uiButton3 = new Sunny.UI.UIButton();
+            this.uiComboBox1 = new Sunny.UI.UIComboBox();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel3.SuspendLayout();
@@ -239,12 +239,12 @@ namespace BK_LIS
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Transparent;
+            this.panel4.Controls.Add(this.uiComboBox1);
             this.panel4.Controls.Add(this.uiTextBox14);
             this.panel4.Controls.Add(this.uiTextBox15);
             this.panel4.Controls.Add(this.uiTextBox13);
             this.panel4.Controls.Add(this.uiLabel17);
             this.panel4.Controls.Add(this.uiTextBox12);
-            this.panel4.Controls.Add(this.uiTextBox10);
             this.panel4.Controls.Add(this.uiLabel18);
             this.panel4.Controls.Add(this.uiLabel19);
             this.panel4.Controls.Add(this.uiLabel16);
@@ -361,22 +361,6 @@ namespace BK_LIS
             this.uiTextBox12.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiTextBox12.Watermark = "";
             this.uiTextBox12.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
-            // 
-            // uiTextBox10
-            // 
-            this.uiTextBox10.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox10.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiTextBox10.Location = new System.Drawing.Point(130, 273);
-            this.uiTextBox10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox10.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox10.Name = "uiTextBox10";
-            this.uiTextBox10.ShowText = false;
-            this.uiTextBox10.Size = new System.Drawing.Size(175, 39);
-            this.uiTextBox10.Style = Sunny.UI.UIStyle.Custom;
-            this.uiTextBox10.TabIndex = 11;
-            this.uiTextBox10.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox10.Watermark = "";
-            this.uiTextBox10.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiLabel18
             // 
@@ -956,6 +940,25 @@ namespace BK_LIS
             this.uiButton3.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton3.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // uiComboBox1
+            // 
+            this.uiComboBox1.DataSource = null;
+            this.uiComboBox1.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.uiComboBox1.FillColor = System.Drawing.Color.White;
+            this.uiComboBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiComboBox1.FormattingEnabled = true;
+            this.uiComboBox1.Location = new System.Drawing.Point(130, 273);
+            this.uiComboBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiComboBox1.MinimumSize = new System.Drawing.Size(63, 0);
+            this.uiComboBox1.Name = "uiComboBox1";
+            this.uiComboBox1.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.uiComboBox1.Size = new System.Drawing.Size(175, 39);
+            this.uiComboBox1.Style = Sunny.UI.UIStyle.Custom;
+            this.uiComboBox1.TabIndex = 137;
+            this.uiComboBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiComboBox1.Watermark = "";
+            this.uiComboBox1.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            // 
             // ReportMain
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -991,7 +994,6 @@ namespace BK_LIS
         private UITextBox uiTextBox13;
         private UILabel uiLabel17;
         private UITextBox uiTextBox12;
-        private UITextBox uiTextBox10;
         private UILabel uiLabel18;
         private UILabel uiLabel19;
         private UILabel uiLabel16;
@@ -1037,6 +1039,7 @@ namespace BK_LIS
         private UIButton uiButton1;
         private UIButton uiButton2;
         private UIButton uiButton3;
+        private UIComboBox uiComboBox1;
     }
 }
 

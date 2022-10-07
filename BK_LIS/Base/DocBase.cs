@@ -148,6 +148,7 @@ namespace BK_LIS.Base
             dataGridView1.Columns[5].HeaderText = "姓名简称";
         }
         #endregion
+
         #region 数据删除
         private void uiSymbolButton2_Click(object sender, EventArgs e)
         {
