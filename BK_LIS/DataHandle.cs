@@ -329,6 +329,11 @@ namespace BK_LIS
         private void ChuLiOneHL7(string ib_data)
         {
             strKey = DateTime.Now.ToString("yyyyMMddhhmmss");//报告单号
+
+            Maticsoft.Model.report_main report_main = new Maticsoft.Model.report_main();
+            Maticsoft.DAL.report_main report_mainDal = new Maticsoft.DAL.report_main();
+            report_main.ReportID = strKey;
+
             #region 对合格串进行解析
             string[] arrayData = ib_data.Split('\n');
             for (int i = 0; i < arrayData.Length - 1; i++)
@@ -343,6 +348,14 @@ namespace BK_LIS
                         patName = arrayLine[5].Split('^')[1];//姓名
                         patBirthday = IsNullCheck(arrayLine[7].ToString());//出生年月
                         patSex = arrayLine[8].ToString();//性别
+
+
+                        report_main.Barcode = CaseNo;
+                        report_main.PatName = patName;
+                        //report_main. = patBirthday;
+                        report_main.PatSex = patSex;
+
+
                         break;
                     #endregion
 
@@ -355,12 +368,20 @@ namespace BK_LIS
                             deptName = arrayLine[3].Split('^')[0];//科室
                             roomNo = arrayLine[3].Split('^')[1];//房间
                             bedNo = arrayLine[3].Split('^')[2];//床号
+                            
                         }
                         catch (Exception)
                         {
                         }
 
-                        fbType = arrayLine[20].ToString();//床号
+                        fbType = arrayLine[20].ToString();//费别
+
+                        report_main.PatType = patType;
+                        report_main.PatDept = deptName;
+                        report_main.RoomNo = roomNo;
+                        report_main.BedNo = bedNo;
+                        report_main.TestName = fbType;
+
                         break;
                     #endregion
 
@@ -387,6 +408,21 @@ namespace BK_LIS
                         Diagnostic = arrayLine[24].ToString();//诊断ID
                         AuditUser = arrayLine[28].ToString();//审核者
 
+
+
+
+                        report_main.ReportID = sampleNo;
+                        //report_main = CollectTime.ToString();
+                        //report_main. = TestTime.ToString();
+                        //report_main.co = Collect_User;
+                        report_main.Diagnosis = Diagion;
+                        //report_main.Barcode = RecieveTime.ToString();
+                        //report_main.Barcode = SampleSource;
+                        //report_main.Barcode = AuditTime.ToString();
+                        //report_main.Diagnosis = Diagnostic;
+                        //report_main.Barcode = AuditUser;
+
+                        report_mainDal.Add(report_main);
                         break;
                     #endregion
 
