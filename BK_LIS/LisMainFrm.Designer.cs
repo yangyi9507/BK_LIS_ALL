@@ -37,6 +37,7 @@ namespace BK_LIS
             this.uiHeaderButton4 = new Sunny.UI.UIHeaderButton();
             this.uiHeaderButton1 = new Sunny.UI.UIHeaderButton();
             this.uiHeaderButton2 = new Sunny.UI.UIHeaderButton();
+            this.uiHeaderButton3 = new Sunny.UI.UIHeaderButton();
             this.uiTableLayoutPanel1 = new Sunny.UI.UITableLayoutPanel();
             this.uiTabControl1 = new Sunny.UI.UITabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -60,6 +61,7 @@ namespace BK_LIS
             this.uiTableLayoutPanel2.Controls.Add(this.uiHeaderButton4, 0, 0);
             this.uiTableLayoutPanel2.Controls.Add(this.uiHeaderButton1, 0, 0);
             this.uiTableLayoutPanel2.Controls.Add(this.uiHeaderButton2, 0, 0);
+            this.uiTableLayoutPanel2.Controls.Add(this.uiHeaderButton3, 5, 0);
             this.uiTableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.uiTableLayoutPanel2.Name = "uiTableLayoutPanel2";
             this.uiTableLayoutPanel2.RowCount = 1;
@@ -221,6 +223,37 @@ namespace BK_LIS
             this.uiHeaderButton2.TipsForeColor = System.Drawing.Color.Transparent;
             this.uiHeaderButton2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
+            // uiHeaderButton3
+            // 
+            this.uiHeaderButton3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiHeaderButton3.FillColor = System.Drawing.Color.Transparent;
+            this.uiHeaderButton3.FillDisableColor = System.Drawing.Color.White;
+            this.uiHeaderButton3.FillHoverColor = System.Drawing.Color.White;
+            this.uiHeaderButton3.FillPressColor = System.Drawing.Color.White;
+            this.uiHeaderButton3.FillSelectedColor = System.Drawing.Color.White;
+            this.uiHeaderButton3.Font = new System.Drawing.Font("微软雅黑", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiHeaderButton3.ForeHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));
+            this.uiHeaderButton3.ForePressColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));
+            this.uiHeaderButton3.ForeSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));
+            this.uiHeaderButton3.Location = new System.Drawing.Point(898, 3);
+            this.uiHeaderButton3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiHeaderButton3.Name = "uiHeaderButton3";
+            this.uiHeaderButton3.Padding = new System.Windows.Forms.Padding(0, 5, 0, 3);
+            this.uiHeaderButton3.Radius = 0;
+            this.uiHeaderButton3.RadiusSides = Sunny.UI.UICornerRadiusSides.None;
+            this.uiHeaderButton3.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiHeaderButton3.Size = new System.Drawing.Size(173, 49);
+            this.uiHeaderButton3.Style = Sunny.UI.UIStyle.Custom;
+            this.uiHeaderButton3.StyleCustomMode = true;
+            this.uiHeaderButton3.Symbol = 0;
+            this.uiHeaderButton3.SymbolColor = System.Drawing.Color.Transparent;
+            this.uiHeaderButton3.TabIndex = 7;
+            this.uiHeaderButton3.Text = "通信设置";
+            this.uiHeaderButton3.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiHeaderButton3.TipsForeColor = System.Drawing.Color.Transparent;
+            this.uiHeaderButton3.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
+            this.uiHeaderButton3.Click += new System.EventHandler(this.uiHeaderButton3_Click);
+            // 
             // uiTableLayoutPanel1
             // 
             this.uiTableLayoutPanel1.ColumnCount = 1;
@@ -302,5 +335,6 @@ namespace BK_LIS
         private Sunny.UI.UITableLayoutPanel uiTableLayoutPanel1;
         private UITabControl uiTabControl1;
         private System.Windows.Forms.TabPage tabPage1;
+        private UIHeaderButton uiHeaderButton3;
     }
 }

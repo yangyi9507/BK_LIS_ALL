@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LisRead.sanfenlei
 {
-    class HEMA3X
+    public class HEMA3X
     {
 
         #region 定义
@@ -83,8 +83,6 @@ namespace LisRead.sanfenlei
         int itemNoPosLine = 0; // 通道号在行数组中的位置
         int itemNoPos = 0; // 通道号在数组中的下标
         #endregion
-
-
         
         public byte[] buffer = new byte[1024 * 1024 * 3];
     }

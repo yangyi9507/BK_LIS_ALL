@@ -1,4 +1,5 @@
 ﻿using BK_LIS.Base;
+using BK_LIS.Pages;
 using Sunny.UI;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace BK_LIS
             InitializeComponent();
             uiTabControl1.TabPages.Clear();
             AddPage(new ReportMain());
+            AddPage(new SFLReportMain());
             SelectPage(1000);
         }
 
@@ -26,6 +28,7 @@ namespace BK_LIS
         {
             uiTabControl1.TabPages.Clear();
             AddPage(new ReportMain());
+            AddPage(new SFLReportMain());
             SelectPage(1000);
         }
 
@@ -40,6 +43,14 @@ namespace BK_LIS
             AddPage(new DocBase());
             AddPage(new CommBase());           
             SelectPage(1000);
+        }
+
+        private void uiHeaderButton3_Click(object sender, EventArgs e)
+        {
+            uiTabControl1.TabPages.Clear();
+            AddPage(new DataHandle());
+            SelectPage(1000);
+            
         }
     }
 }

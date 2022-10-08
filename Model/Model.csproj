@@ -109,7 +109,10 @@
     <Compile Include="classtype.cs" />
     <Compile Include="dept.cs" />
     <Compile Include="doctor.cs" />
+    <Compile Include="equipbase.cs" />
     <Compile Include="item.cs" />
+    <Compile Include="report_detail.cs" />
+    <Compile Include="report_main.cs" />
     <Compile Include="sampleclass.cs" />
     <Compile Include="testlist.cs" />
   </ItemGroup>

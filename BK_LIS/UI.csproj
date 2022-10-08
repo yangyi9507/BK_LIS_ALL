@@ -123,12 +123,24 @@
     <Compile Include="Base\TestListBase.Designer.cs">
       <DependentUpon>TestListBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataHandle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataHandle.Designer.cs">
+      <DependentUpon>DataHandle.cs</DependentUpon>
+    </Compile>
     <Compile Include="ErrorCode.cs" />
     <Compile Include="LisMainFrm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LisMainFrm.Designer.cs">
       <DependentUpon>LisMainFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SFLReportMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pages\SFLReportMain.Designer.cs">
+      <DependentUpon>SFLReportMain.cs</DependentUpon>
     </Compile>
     <Compile Include="ReportMain.cs">
       <SubType>Form</SubType>
@@ -159,8 +171,14 @@
     <EmbeddedResource Include="Base\TestListBase.resx">
       <DependentUpon>TestListBase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DataHandle.resx">
+      <DependentUpon>DataHandle.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LisMainFrm.resx">
       <DependentUpon>LisMainFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\SFLReportMain.resx">
+      <DependentUpon>SFLReportMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportMain.resx">
       <DependentUpon>ReportMain.cs</DependentUpon>
