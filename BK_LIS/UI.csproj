@@ -64,6 +64,11 @@
     <Reference Include="System.Data.SQLite">
       <HintPath>..\DBUtility\bin\Debug\System.Data.SQLite.DLL</HintPath>
     </Reference>
+    <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -170,6 +175,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -246,6 +252,12 @@
     <Content Include="Resources\valencia.png" />
     <Content Include="Resources\villareal.png" />
     <Content Include="Resources\zaragoza.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\comm\Comm.csproj">
+      <Project>{D6172C1C-8B0B-4783-B9D6-C113CD69A3AF}</Project>
+      <Name>Comm</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

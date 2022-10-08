@@ -211,12 +211,28 @@ namespace Maticsoft.DAL
 		/// </summary>
 		public DataSet GetList(string strWhere)
 		{
-			StringBuilder strSql=new StringBuilder();
+			StringBuilder strSql = new StringBuilder();
 			strSql.Append("select id,DeptID,DeptName,DeptNamePy,DeptMemo ");
 			strSql.Append(" FROM lismain.dept ");
-			if(strWhere.Trim()!="")
+			if (strWhere.Trim() != "")
 			{
-				strSql.Append(" where "+strWhere);
+				strSql.Append(" where " + strWhere);
+			}
+			return DbHelperMySQL.Query(strSql.ToString());
+		}
+
+
+		/// <summary>
+		/// 获得数据列表
+		/// </summary>
+		public DataSet GetDeptCode(string strWhere)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("select DISTINCT DeptID,DeptName");
+			strSql.Append(" FROM lismain.dept ");
+			if (strWhere.Trim() != "")
+			{
+				strSql.Append(" where " + strWhere);
 			}
 			return DbHelperMySQL.Query(strSql.ToString());
 		}

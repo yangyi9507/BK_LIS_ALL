@@ -4,14 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D6172C1C-8B0B-4783-B9D6-C113CD69A3AF}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>comm</RootNamespace>
-    <AssemblyName>comm</AssemblyName>
+    <ProjectGuid>{907864F9-0773-4EBF-A10B-77F2107CCE68}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>LisRead</RootNamespace>
+    <AssemblyName>LisRead</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,24 +32,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common.cs" />
-    <Compile Include="MySqlHelper.cs" />
-    <Compile Include="TcpSockect.cs" />
-    <Compile Include="TextEncoder.cs" />
+    <Compile Include="sanfenlei\HEMA3X.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data">
-      <HintPath>..\BKDateDealCenter\bin\MySql.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
+    <Folder Include="tedingdanbai\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

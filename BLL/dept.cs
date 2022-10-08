@@ -141,6 +141,15 @@ namespace Maticsoft.BLL
 			return GetList("");
 		}
 
+
+		/// <summary>
+		/// 获得数据列表
+		/// </summary>
+		public DataSet GetDeptCode(string strWhere)
+		{
+			return dal.GetDeptCode(strWhere);
+		}
+
 		/// <summary>
 		/// 分页获取数据列表
 		/// </summary>
