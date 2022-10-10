@@ -271,6 +271,32 @@
     <Content Include="Resources\valencia.png" />
     <Content Include="Resources\villareal.png" />
     <Content Include="Resources\zaragoza.png" />
+    <Content Include="SQLData\Data\classtype.sql" />
+    <Content Include="SQLData\Data\dept.sql" />
+    <Content Include="SQLData\Data\doctor.sql" />
+    <Content Include="SQLData\Data\equipbase.sql" />
+    <Content Include="SQLData\Data\item.sql" />
+    <Content Include="SQLData\Data\mdelclass.sql" />
+    <Content Include="SQLData\Data\pattype.sql" />
+    <Content Include="SQLData\Data\report_detail.sql" />
+    <Content Include="SQLData\Data\report_graph.sql" />
+    <Content Include="SQLData\Data\report_main.sql" />
+    <Content Include="SQLData\Data\sampleclass.sql" />
+    <Content Include="SQLData\Data\sampleinfo.sql" />
+    <Content Include="SQLData\Data\testlist.sql" />
+    <Content Include="SQLData\structure\classtype.sql" />
+    <Content Include="SQLData\structure\dept.sql" />
+    <Content Include="SQLData\structure\doctor.sql" />
+    <Content Include="SQLData\structure\equipbase.sql" />
+    <Content Include="SQLData\structure\item.sql" />
+    <Content Include="SQLData\structure\mdelclass.sql" />
+    <Content Include="SQLData\structure\pattype.sql" />
+    <Content Include="SQLData\structure\report_detail.sql" />
+    <Content Include="SQLData\structure\report_graph.sql" />
+    <Content Include="SQLData\structure\report_main.sql" />
+    <Content Include="SQLData\structure\sampleclass.sql" />
+    <Content Include="SQLData\structure\sampleinfo.sql" />
+    <Content Include="SQLData\structure\testlist.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\comm\Comm.csproj">
