@@ -15,7 +15,7 @@ namespace comm
         /// <returns></returns>
         public static string bytesToText(byte[] bytes)
         {
-            return Encoding.GetEncoding("gb2312").GetString(bytes);
+            return Encoding.GetEncoding("UTF-8").GetString(bytes);
             //return Encoding.UTF8.GetString(bytes);
         }
 

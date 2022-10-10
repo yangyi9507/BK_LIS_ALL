@@ -22,6 +22,9 @@ namespace BK_LIS
         public static readonly string EMPTIY_ERROR = "ID不允许为空！";
 
         public static readonly string NO_ERROR = "序号只能为数字！";
-                
+
+        public static readonly string CONNECT_SUCCESS = "连接成功！";
+        public static readonly string CONNECT_FALSE = "连接失败！";
+
     }
 }

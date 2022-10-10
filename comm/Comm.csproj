@@ -40,7 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
+    <Compile Include="log4netHelper.cs" />
     <Compile Include="MySqlHelper.cs" />
+    <Compile Include="StaticComm.cs" />
     <Compile Include="TcpSockect.cs" />
     <Compile Include="TextEncoder.cs" />
   </ItemGroup>
@@ -50,6 +52,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Para\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

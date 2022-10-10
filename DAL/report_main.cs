@@ -29,6 +29,31 @@ namespace Maticsoft.DAL
 			return DbHelperMySQL.Exists(strSql.ToString(),parameters);
 		}
 
+		public bool ExistsBySampleNo(string SampleNo)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("select count(1) from lismain.report_main");
+			strSql.Append(" where SampleNo=@SampleNo ");
+			MySqlParameter[] parameters = {
+					new MySqlParameter("@SampleNo", MySqlDbType.VarChar,255)            };
+			parameters[0].Value = SampleNo;
+
+			return DbHelperMySQL.Exists(strSql.ToString(), parameters);
+		}
+
+		public DataTable QueryBySampleNo(string SampleNo)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("select reportID from lismain.report_main");
+			strSql.Append(" where SampleNo=@SampleNo ");
+			MySqlParameter[] parameters = {
+					new MySqlParameter("@SampleNo", MySqlDbType.VarChar,255)            };
+			parameters[0].Value = SampleNo;
+
+			return DbHelperMySQL.Query(strSql.ToString(), parameters).Tables[0];
+		}
+
+
 
 		/// <summary>
 		/// 增加一条数据

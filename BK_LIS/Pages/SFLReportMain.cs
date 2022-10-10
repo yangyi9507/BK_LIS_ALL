@@ -14,6 +14,7 @@ using System.Net;
 using comm;
 using Maticsoft.Model;
 using Maticsoft.BLL;
+using System.IO;
 
 namespace BK_LIS.Pages
 {
@@ -84,6 +85,27 @@ namespace BK_LIS.Pages
                 uiDataGridView2.Columns[3].HeaderText = "单位";
                 uiDataGridView2.Columns[4].HeaderText = "参考范围";
                 uiDataGridView2.Columns[5].HeaderText = "报警表示";
+
+                #endregion
+
+                #region 读取数据库 base64编码的图片
+                byte[] bytefile;
+                Maticsoft.BLL.report_graph report_graph = new Maticsoft.BLL.report_graph();  //声明对象               
+                DataTable dt = report_graph.GetList(strWhere).Tables[0];//赋值
+                if (dt.Rows.Count > 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        bytefile = Convert.FromBase64String(dt.Rows[i]["Graph"].ToString());//编码转图片
+                        MemoryStream ms = new MemoryStream(bytefile);
+                        Image img = Image.FromStream(ms);
+                        if (i == 0) { this.pictureBox1.Image = img; }
+                        else if (i == 1) { this.pictureBox2.Image = img; }
+                        else if (i == 2) { this.pictureBox3.Image = img; }
+                    }
+
+                }
+                else { this.pictureBox1.Image = null; this.pictureBox2.Image = null; this.pictureBox3.Image = null; }
 
                 #endregion
 
