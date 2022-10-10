@@ -3,6 +3,7 @@ using Sunny.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -13,11 +14,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace BK_LIS
 {
     public partial class DataHandle : UIPage
     {
         public int ID = 0;// 初始化仪器ID
+
+        public static string IpString   = ConfigurationManager.AppSettings["IpString"];
+        public static string PortString = ConfigurationManager.AppSettings["PortString"];
 
 
         // ------普通报告------
@@ -57,7 +62,7 @@ namespace BK_LIS
         private static Socket clientSocket = null;
         public byte[] buffer = new byte[1024 * 1024 * 3];
         public static List<TcpClient> clientList = new List<TcpClient>();
-
+        
         public DataHandle()
         {
             InitializeComponent();
@@ -225,6 +230,7 @@ namespace BK_LIS
             }
         }
         #endregion
+
         #region 删除
         private void uiButton2_Click(object sender, EventArgs e)
         {
@@ -271,8 +277,8 @@ namespace BK_LIS
             //}
 
             tcpServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPAddress ipaddress = IPAddress.Parse("10.0.0.20");
-            EndPoint point = new IPEndPoint(ipaddress, int.Parse("5000"));
+            IPAddress ipaddress = IPAddress.Parse(IpString);
+            EndPoint point = new IPEndPoint(ipaddress, int.Parse(PortString));
 
             tcpServer.Bind(point);//绑定IP和申请端口
             tcpServer.Listen(100);//设置客户端最大连接数
@@ -547,6 +553,7 @@ namespace BK_LIS
             #endregion
         }
         #endregion
+
         #region 将图片进行反色处理
         /// <summary>
         /// 将图片进行反色处理
@@ -594,6 +601,7 @@ namespace BK_LIS
         }
         #endregion
 
+        #region 重新获取Base64
         public string ImgToBase64String(Bitmap bmp)
         {
             try
@@ -611,6 +619,8 @@ namespace BK_LIS
                 return null;
             }
         }
+
+        #endregion
 
         #region 把一个数组取出指定的长度
         /// <summary>
@@ -706,47 +716,61 @@ namespace BK_LIS
 
         private void uiButton5_Click(object sender, EventArgs e)
         {
-            string str = "MSH|^~|EH8600|Excbio|||20000101021746||ORU^R01|d4a8874d-1f0c-4269|P|2.3.1||||||UNICODE\r";
-            str += "PID|1||11002^^^^MR||^杨桑||20221004000000|2\r";
-            str += "PV1|1|末梢血|2#|||||||||||||||||\r";
-            str += "OBR|1||6-968|01001^99MRC|||2022-06-15 15:52:41|||李佩||||||||||||||HM||||||||produce\r";
-            str += "OBX |1|IS|08001^Take Mode^99MRC||O||||||F\r";
-            str += "OBX|2|IS|08002^Blood Mode^99MRC||W||||||F\r";
-            str += "OBX|3|IS|08003^Test Mode^99MRC||CBC+DIFF||||||F\r";
-            str += "OBX|4|NM|30525-0^Age^LN||12|1|||||F\r";
-            str += "OBX|5|IS|01001^Remark^99MRC||额嗯嗯嗯嗯||||||F\r";
-            str += "OBX|6|IS|01002^Ref Group^99MRC||3||||||F\r";
-            str += "OBX|7|NM|6690-2^WBC^LN||5.86|10^9/L|0-0||||F\r";
-            str += "OBX|8|NM|770-8^LYM%^LN||62.4|%|0-0||||F\r";
-            str += "OBX|9|NM|736-9^MID%^LN||30.4|%|0-0||||F\r";
-            str += "OBX|10|NM|5905-5^GRA%^LN||7.2|%|0-0||||F\r";
-            str += "OBX|13|NM|751-8^LYM#^LN||3.66|10^9/L|0-0||||F\r";
-            str += "OBX|14|NM|731-0^MID#^LN||1.78|10^9/L|0-0||||F\r";
-            str += "OBX|15|NM|742-7^GRA#^LN||0.42|10^9/L|0-0||||F\r";
-            str += "OBX|22|NM|789-8^RBC^LN||4.35|10^12/L|0-0||||F\r";
-            str += "OBX|23|NM|718-7^HGB^LN||129|g/L|0-0||||F\r";
-            str += "OBX|24|NM|4544-3^HCT^LN||49.6|%|0-0||||F\r";
-            str += "OBX|25|NM|787-2^MCV^LN||114|fL|0-0||||F\r";
-            str += "OBX|26|NM|785-6^MCH^LN||29.7|pg|0-0||||F\r";
-            str += "OBX|27|NM|786-4^MCHC^LN||260|g/L|0-0||||F\r";
-            str += "OBX|28|NM|788-0^RDW-CV^LN||14|%|0-0||||F\r";
-            str += "OBX|29|NM|21000-5^RDW-SD^LN||71.8|fL|0-0||||F\r";
-            str += "OBX|30|NM|777-3^PLT^LN||275|10^9/L|0-0||||F\r";
-            str += "OBX|31|NM|32623-1^MPV^LN||9.9|fL|0-0||||F\r";
-            str += "OBX|32|NM|32207-3^PDW^LN||16.5|%|0-0||||F\r";
-            str += "OBX|33|NM|11003^PCT^99MRC||0.272|%|0-0||||F\r";
-            str += "OBX|34|NM|34167-7^P-LCC^LN||80|10^9/L|0-0||||F\r";
-            str += "OBX|35|NM|48386-7^P-LCR^LN||29|%|0-0||||F\r";
-            str += "OBX|40|IS|17790-7^WBC Left Shift?^LN||?||||||F\r";
-            str += "OBX|41|NM|15001^WBC Histogram. Left Line^99MRC||?||||||F\r";
-            str += "OBX|42|NM|15003^WBC Histogram. Middle Line^99MRC||?||||||F\r";
-            str += "OBX|43|ED|15008^WBC Histogram. BMP^99MRC||^Image^BMP^Base64^iVBORw0KGgoAAAANSUhEUgAAAM8AAABuCAIAAAAPo9BDAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAA1hAAANYQE8JGIuAAAFPUlEQVR4nO3ZUUgbdxwH8J9bHi4shT8sDxeIxQMHnjgwocIitdC8eeBDAw5qYSDpHiSs0Cbtw9K9DPFhiA9FOxipAyEWHDroyAodjQ+F+CBcBhl3BcE8KLtAHy4wR8IauD0kde1SjXV3f5Ps+3kzZ+77j3z53/9niAAAAAAAAAAAAAAAAAAAAAAAAAAA4EiZbCZwIUBExgtD9IvkIk3XAp8ETNNU86paUOVhmYiUCUXTNW1Hm5qeOuslQ/t67/jL+m+6LMtinyi4hNGRUalf0nd0Iso+ywYDwaWFpfiNOBPZ4r3F8Hg4GAjqeZ3LsqEjvX/85V5/b6/U63a5a7XauQ/PVQ+q7g/cuq5fGru09nBNmVDKf5bP+8/v/77/6IdHtb9qpVKJz7qhE7XY29SCOjgwGAwEVx+uhi6E5AFZK2hEFB4LqwX17pd3NzY2RJ9o7BlcVgudrfWTVJIkeUjObmbdbrf0kaTrr56kHweDI8H09+myUfb1+risFjpbi7ZVD6qCSyAiqlGxWBwNjerP/zmZVatV5mXrP61PTU6JflEQBGVCcXS50NFatI2IintFo2QQkbqtMg+rHlTp1ZM08ziTuJEo7ZcSdxLZzaymaz4/NjkAAAAAAAAAAICjWJZ1whc55HJ47/8Zh79b6//uAtgFbQN+0DZoGzgDgY2wtwE/p2kbZtKuhJkUugraBvygbdA2cAYCG2FvA34wk0IDZlLoKmgb8IO2QdvAGQhshL0N+MFMCg2YSaGroG3AD9oGbQNnILAR9jbgBzMpNGAmha6CtgE/aBu0DZyBwEbY24AfzKTQgJkUugraBvygbdA2cAYCG2FvA34wk0IDZlLoKmgb8IO2QdvAGQhshL0N+MFMCg2YSaGroG3AD9oGbQNnILAR9jbgBzMpNGAmha6CtgE/aBu0DZyBwEbY24AfzKTQgJkUugraBvygbdA2cAYCG/Ucfxltg5Z6elq06KTOajbsxPeeYXSnjPA4twEAAAAAAAAAEEWno4ZhqHlVHpLtumf8dnx3bze1nDomxfZc5mXptbRpmrmtnNQvccslIiY2ojVdC18O84wmInlIrrysxG/GHcqN346bf5jz9+ctyxL7xNMvlInMNE2pX4rORHNbudPf6E2RyUjm58xh25pTnMhVxpX4zTjzsvRqOr2W5pZbv23kakTwCMmvk2pe5RlNRJknGW1Hq7fNidzdvV1lXCGB/mvbotONFYiiaFkW87LT3+tNs3Ozh21rTnEul4gik5Hcdo5/riiK8/fmUyspntHKuKLm1cXlxXrbbM9NraQsy6pUKuEr4ZZta/FdgugXtR2NiEqlUvmg7PP73mkpJ9Sc4mhucCRY32B45srDsmEYkSuRxK0Ev2gXzS/Mx27FBBLqL9iee/2z6+VyeXRsNPs42/KXW31zVTv2R7s0pziWK/VJsc9jSwtLnHP1X/Ued8+D7x6s/7jOLTo2E8sX8lubW0fe1smP3KxF24ql4qA8SESiX2QeZpQMJxbRnOJQLvOyzC+ZxJ2E/lznmdtQpaVvl8IXw4wxPtGRTyPKuGKa5rWr12bnZqemp3h/5HdyeISMzcSePntq231dNPvNbGolRa63pziRK3iE3HZu8f4iuYhnLhHFvohFZ6LMy5JfJY0XBs/outRy6l9Tgo25pmkGLgTqU4I8IAseQfAIp1xoYzwuqPKAPWO51C9ZrxGY8NYU23OTc0nLsiovK/VceVjmk0tE0oCUeZIxTVMtqKHLoaOCnIiuO2ybE7mvt+1Q6GLIttUDAAAAERH9DWmD+igVafNHAAAAAElFTkSuQmCC||||||F\r";
-            str += "OBX|44|NM|15051^RBC Histogram. Left Line^99MRC||?||||||F\r";
-            str += "OBX|45|NM|15052^RBC Histogram. Right Line^99MRC||?||||||F\r";
-            str += "OBX|46|ED|15056^RBC Histogram. BMP^99MRC||^Image^BMP^Base64^iVBORw0KGgoAAAANSUhEUgAAAM8AAABuCAIAAAAPo9BDAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAA1hAAANYQE8JGIuAAAEnElEQVR4nO3ZMWgbVxzH8efi4Qoe3qDhDC5Y4MEXWrBEA1aIBx90iIIHX/AQDwWjdDCiQyuni+hSTIZgOpQ4haKkYJCHFFFoUQst9hKQh8ApYDgVXKSCAydo4QQt2NDCdbBRDHYsI1lPT/L3sx0S0k+8H3/eHwkBAAAAAAAAAAAAAAAAAACAN4pNx4IgcHddb8+zP7CPH8uuu+taU5YQIjmX9Cqet+ctLi32Oiz6XGw6VvihIISwZ+2t7a3mY2oplXuak6as1qrmuGmMGLGpWK/DQnfDF3yfOW7W/6q/fhwza69qd+bvbH63Wf+jLoQovyx3JSAGSOu22TO2t+cJIW7P3ZZS2jO2u+taE1Y8EXccx9/3ux8SA+Ktlu/Yfr5tz9rGsFH7vXb0GH8vHr8ez3+bb/iN0XdGux8SA6J124QQ9Vf1nZ2dxbuv94DDw0MZkYUfC4sLi+aYaRhGci7ZtZC4GpprQWI64ZbdkyuqM+8IIZwFx9vzqrVqajnV67AAAAAAAACA5sIwbPtV9Iq253Kh/xKAS0HboA5tgza0vQGgHzHboE5HbWPy6Unbc2G2QR3aBnVoG7Sh7Q0A/YjZBnXYSQeQtufCbIM6tA3q0DZoQ9sbAPoRsw3qsJMOIG3PhdkGdWgb1KFt0Ia2NwD0I2Yb1GEnHUDanguzDerQNqhD26ANbW8A6EfMNqjDTjqAtD0XZhvUoW1Qh7ZBG9reANCPmG1Qh510AGl7Lsw2qEPboA5tgza0vQGgHzHboA476QDS9lyYbVCHtkEd2gZtaHsDQD9itkEddtIBpO25MNugDm2DOrQN2tD2BoB+xGyDOuykA0jbc2G2QR3aBnVoG7Sh7Q0A/Wjo/JdpG1oaGmrRoovqRtv65TO79LFXOSr3NgAAAAAAACFSSynf992ya71r9SpD5n6mul/NPc2dk0qHnDIi88/yQRCUdkrRiajWUc3jqF7Fs2ftTqJm7meCv4O1x2thGJrjZkeZgiCITkRTy6nSTqn9D+qMs+AUfyo223Y6lSY5k7eSmU8yMiLzm/n8s7zOUaUpnbuOMWJkv8i6ZbeTqNX9avJWUhii07allo6/xjTNMAxlRLb/WZ1ZfbDabNvpVPrkPOIsOKUXJf2jmqa59tVabiPXdtTcRi4Mw4ODA3vebtm2Fv8lmGOmt+cJIer1euOfxujYaNs/7BKdTqVbzvj1+NHA0DmqNWX5vu/MOyufrrQd9d6H9xqNxo2ZG9s/b7f8xlb/XP137mOvnE6lU87oeDT9UXr9y/UzkugUtfKyMvT20JNvnhS+L5yRpAtRW7StVq9ds64JIcwxU45Iv+53+oWX4XQqfXLKiCz+Wlz5bKXyW0XzqEIIcSjWv163b9pSyt5Hbd4T08vpredb3f2ycwyL1YeruY2cGD47lSY5jRGj9KL06PEjMSw0j5r+OJ1aTsmIzH6e9f/0O4kaBEHs/djRlmBNWsaIYYwYbcY63oF3XWuyN+t6dCIanmBI48xUPc8phMg+yIZhePDvwVFUa8rSNmp0Mlr8pRgEgbvrJmYTbwp2kagn29aUuJlQ8TMAALhK/gcTeAhvfRu6CgAAAABJRU5ErkJggg==||||||F\r";
-            str += "OBX|47|NM|15111^PLT Histogram. Left Line^99MRC||?||||||F\r";
-            str += "OBX|48|NM|15112^PLT Histogram. Right Line^99MRC||?||||||F\r";
-            str += "OBX|49|ED|15116^PLT Histogram. BMP^99MRC||^Image^BMP^Base64^iVBORw0KGgoAAAANSUhEUgAAAM8AAABuCAIAAAAPo9BDAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAA1hAAANYQE8JGIuAAAEEklEQVR4nO3ZP2gbZxjH8VfFwxU03KDhDB584EEKHaLQQhySIYIO1lCIQoYuhXDp4IoOrZwuoksRGYLpUOIUyiWDQRkMplBQCy3xYrgMgXPBIBUM0pDhBB1O0IIKKVwHGeFCGimW9Oit3u9n0x/Ej5cfj55XUgoAAAAAAAAAAAAAAAAAAAD/KX85H8dxs9UMj0I36+Yv5/d/2B+85O/6zZNm/2W/edKs3a/NNycWwbBe3qZX36ufbZtSSlkqiqK5hcP/zVtjvi84DJxlZ6ZRsPDGbVtxo9g6bs00Chbe0sh3FK4VwqOw0+l4n3juqiuQCYtqdNsODg9ufnDz9MHqTMNgwY37TTpUfL/Y7rTbnbabZc4BAAAAAAAAbyRJkjGfxIRMONU3/nUXODfaBjm0DdowYZmAGGYb5JynbQy8WTDhVJltkEPbIIe2QRsmLBMQw2yDHO6kujDhVJltkEPbIIe2QRsmLBMQw2yDHO6kujDhVJltkEPbIIe2QRsmLBMQw2yDHO6kujDhVJltkEPbIIe2QRsmLBMQw2yDHO6kujDhVJltkEPbIIe2QRsmLBMQw2yDHO6kujDhVJltkEPbIIe2QRsmLBMQw2yDHO6kujDhVJltkEPbIIe2QRsmLBMQw2yDHO6kujDhVJltkEPbIIe2QRsmLBMQw2yDHO6kujDhVJltkEPbIIe2QRsmLBMQk3r9y7QNI6VSI1o0rum2jU8z/NPY2wAAAAAAAJTybntRFIVHYe6d3LyzqMrdSvtF23/sD5/RJJ6dset79TiOg2eBu+bqlc05zdZsNQvXC1PPVrlbif+Itx9uJ0nirDoTBY3j2F1zvU0veBZMGGtypVulxo+NYdv0iVfcKFY+q9gZu/6kXt+ra5XNduzShyUrbVW/qoZH4dSztV+0ixtFZalJ2+bdPk3jOE6SJHbGnjDZ5Gr3asO2aRivdKsUPA+Uftkcx9n+Ztvf9aebzd/1kyTp9/uFG4WRbRvxX4Kz4jRPmkqpbrfb+7O3vLJ87lizoGG8S+9dGswPrbLlLuaiKCrdKG19vjXdbHc+utPr9a5cu3Lw08HIN4/65+rv1z6cO83iuatu+ePyztc7rwgz12ytX1upt1OPvnu0//3+K8JIZRvRtk63cyF3QSnlrDh22o66kUiqcWkVz87YjV8aW19stX5r6ZZNKaX+Ujvf7hSuFmzb1i7bwHCdLG+Wnx4+nXccpZZU7X7N3/XVklI6xbPSVvA8ePDwgVpSumUrf1r2Nj07Y1e/rEa/R1PPFsdx/t384JaQy+astGWlrXN+1ulV+TjMZef8C4i75iZnWLalT7zqvWqSJP2X/UG23MWcPtncrNv4uRHHcXgcrl9fHzw5xWxn2za0fnV94uAAAOBf/gEunzZSiZ8LcwAAAABJRU5ErkJggg==||||||F\r";
+            #region 三分类测试串
+            //string str = "MSH|^~|EH8600|Excbio|||20000101021746||ORU^R01|d4a8874d-1f0c-4269|P|2.3.1||||||UNICODE\r";
+            //str += "PID|1||11002^^^^MR||^杨桑||20221004000000|2\r";
+            //str += "PV1|1|末梢血|2#|||||||||||||||||\r";
+            //str += "OBR|1||6-968|01001^99MRC|||2022-06-15 15:52:41|||李佩||||||||||||||HM||||||||produce\r";
+            //str += "OBX |1|IS|08001^Take Mode^99MRC||O||||||F\r";
+            //str += "OBX|2|IS|08002^Blood Mode^99MRC||W||||||F\r";
+            //str += "OBX|3|IS|08003^Test Mode^99MRC||CBC+DIFF||||||F\r";
+            //str += "OBX|4|NM|30525-0^Age^LN||12|1|||||F\r";
+            //str += "OBX|5|IS|01001^Remark^99MRC||额嗯嗯嗯嗯||||||F\r";
+            //str += "OBX|6|IS|01002^Ref Group^99MRC||3||||||F\r";
+            //str += "OBX|7|NM|6690-2^WBC^LN||5.86|10^9/L|0-0||||F\r";
+            //str += "OBX|8|NM|770-8^LYM%^LN||62.4|%|0-0||||F\r";
+            //str += "OBX|9|NM|736-9^MID%^LN||30.4|%|0-0||||F\r";
+            //str += "OBX|10|NM|5905-5^GRA%^LN||7.2|%|0-0||||F\r";
+            //str += "OBX|13|NM|751-8^LYM#^LN||3.66|10^9/L|0-0||||F\r";
+            //str += "OBX|14|NM|731-0^MID#^LN||1.78|10^9/L|0-0||||F\r";
+            //str += "OBX|15|NM|742-7^GRA#^LN||0.42|10^9/L|0-0||||F\r";
+            //str += "OBX|22|NM|789-8^RBC^LN||4.35|10^12/L|0-0||||F\r";
+            //str += "OBX|23|NM|718-7^HGB^LN||129|g/L|0-0||||F\r";
+            //str += "OBX|24|NM|4544-3^HCT^LN||49.6|%|0-0||||F\r";
+            //str += "OBX|25|NM|787-2^MCV^LN||114|fL|0-0||||F\r";
+            //str += "OBX|26|NM|785-6^MCH^LN||29.7|pg|0-0||||F\r";
+            //str += "OBX|27|NM|786-4^MCHC^LN||260|g/L|0-0||||F\r";
+            //str += "OBX|28|NM|788-0^RDW-CV^LN||14|%|0-0||||F\r";
+            //str += "OBX|29|NM|21000-5^RDW-SD^LN||71.8|fL|0-0||||F\r";
+            //str += "OBX|30|NM|777-3^PLT^LN||275|10^9/L|0-0||||F\r";
+            //str += "OBX|31|NM|32623-1^MPV^LN||9.9|fL|0-0||||F\r";
+            //str += "OBX|32|NM|32207-3^PDW^LN||16.5|%|0-0||||F\r";
+            //str += "OBX|33|NM|11003^PCT^99MRC||0.272|%|0-0||||F\r";
+            //str += "OBX|34|NM|34167-7^P-LCC^LN||80|10^9/L|0-0||||F\r";
+            //str += "OBX|35|NM|48386-7^P-LCR^LN||29|%|0-0||||F\r";
+            //str += "OBX|40|IS|17790-7^WBC Left Shift?^LN||?||||||F\r";
+            //str += "OBX|41|NM|15001^WBC Histogram. Left Line^99MRC||?||||||F\r";
+            //str += "OBX|42|NM|15003^WBC Histogram. Middle Line^99MRC||?||||||F\r";
+            //str += "OBX|43|ED|15008^WBC Histogram. BMP^99MRC||^Image^BMP^Base64^iVBORw0KGgoAAAANSUhEUgAAAM8AAABuCAIAAAAPo9BDAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAA1hAAANYQE8JGIuAAAFPUlEQVR4nO3ZUUgbdxwH8J9bHi4shT8sDxeIxQMHnjgwocIitdC8eeBDAw5qYSDpHiSs0Cbtw9K9DPFhiA9FOxipAyEWHDroyAodjQ+F+CBcBhl3BcE8KLtAHy4wR8IauD0kde1SjXV3f5Ps+3kzZ+77j3z53/9niAAAAAAAAAAAAAAAAAAAAAAAAAAA4EiZbCZwIUBExgtD9IvkIk3XAp8ETNNU86paUOVhmYiUCUXTNW1Hm5qeOuslQ/t67/jL+m+6LMtinyi4hNGRUalf0nd0Iso+ywYDwaWFpfiNOBPZ4r3F8Hg4GAjqeZ3LsqEjvX/85V5/b6/U63a5a7XauQ/PVQ+q7g/cuq5fGru09nBNmVDKf5bP+8/v/77/6IdHtb9qpVKJz7qhE7XY29SCOjgwGAwEVx+uhi6E5AFZK2hEFB4LqwX17pd3NzY2RJ9o7BlcVgudrfWTVJIkeUjObmbdbrf0kaTrr56kHweDI8H09+myUfb1+risFjpbi7ZVD6qCSyAiqlGxWBwNjerP/zmZVatV5mXrP61PTU6JflEQBGVCcXS50NFatI2IintFo2QQkbqtMg+rHlTp1ZM08ziTuJEo7ZcSdxLZzaymaz4/NjkAAAAAAAAAAICjWJZ1whc55HJ47/8Zh79b6//uAtgFbQN+0DZoGzgDgY2wtwE/p2kbZtKuhJkUugraBvygbdA2cAYCG2FvA34wk0IDZlLoKmgb8IO2QdvAGQhshL0N+MFMCg2YSaGroG3AD9oGbQNnILAR9jbgBzMpNGAmha6CtgE/aBu0DZyBwEbY24AfzKTQgJkUugraBvygbdA2cAYCG2FvA34wk0IDZlLoKmgb8IO2QdvAGQhshL0N+MFMCg2YSaGroG3AD9oGbQNnILAR9jbgBzMpNGAmha6CtgE/aBu0DZyBwEbY24AfzKTQgJkUugraBvygbdA2cAYCG/Ucfxltg5Z6elq06KTOajbsxPeeYXSnjPA4twEAAAAAAAAAEEWno4ZhqHlVHpLtumf8dnx3bze1nDomxfZc5mXptbRpmrmtnNQvccslIiY2ojVdC18O84wmInlIrrysxG/GHcqN346bf5jz9+ctyxL7xNMvlInMNE2pX4rORHNbudPf6E2RyUjm58xh25pTnMhVxpX4zTjzsvRqOr2W5pZbv23kakTwCMmvk2pe5RlNRJknGW1Hq7fNidzdvV1lXCGB/mvbotONFYiiaFkW87LT3+tNs3Ozh21rTnEul4gik5Hcdo5/riiK8/fmUyspntHKuKLm1cXlxXrbbM9NraQsy6pUKuEr4ZZta/FdgugXtR2NiEqlUvmg7PP73mkpJ9Sc4mhucCRY32B45srDsmEYkSuRxK0Ev2gXzS/Mx27FBBLqL9iee/2z6+VyeXRsNPs42/KXW31zVTv2R7s0pziWK/VJsc9jSwtLnHP1X/Ued8+D7x6s/7jOLTo2E8sX8lubW0fe1smP3KxF24ql4qA8SESiX2QeZpQMJxbRnOJQLvOyzC+ZxJ2E/lznmdtQpaVvl8IXw4wxPtGRTyPKuGKa5rWr12bnZqemp3h/5HdyeISMzcSePntq231dNPvNbGolRa63pziRK3iE3HZu8f4iuYhnLhHFvohFZ6LMy5JfJY0XBs/outRy6l9Tgo25pmkGLgTqU4I8IAseQfAIp1xoYzwuqPKAPWO51C9ZrxGY8NYU23OTc0nLsiovK/VceVjmk0tE0oCUeZIxTVMtqKHLoaOCnIiuO2ybE7mvt+1Q6GLIttUDAAAAERH9DWmD+igVafNHAAAAAElFTkSuQmCC||||||F\r";
+            //str += "OBX|44|NM|15051^RBC Histogram. Left Line^99MRC||?||||||F\r";
+            //str += "OBX|45|NM|15052^RBC Histogram. Right Line^99MRC||?||||||F\r";
+            //str += "OBX|46|ED|15056^RBC Histogram. BMP^99MRC||^Image^BMP^Base64^iVBORw0KGgoAAAANSUhEUgAAAM8AAABuCAIAAAAPo9BDAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAA1hAAANYQE8JGIuAAAEnElEQVR4nO3ZMWgbVxzH8efi4Qoe3qDhDC5Y4MEXWrBEA1aIBx90iIIHX/AQDwWjdDCiQyuni+hSTIZgOpQ4haKkYJCHFFFoUQst9hKQh8ApYDgVXKSCAydo4QQt2NDCdbBRDHYsI1lPT/L3sx0S0k+8H3/eHwkBAAAAAAAAAAAAAAAAAACAN4pNx4IgcHddb8+zP7CPH8uuu+taU5YQIjmX9Cqet+ctLi32Oiz6XGw6VvihIISwZ+2t7a3mY2oplXuak6as1qrmuGmMGLGpWK/DQnfDF3yfOW7W/6q/fhwza69qd+bvbH63Wf+jLoQovyx3JSAGSOu22TO2t+cJIW7P3ZZS2jO2u+taE1Y8EXccx9/3ux8SA+Ktlu/Yfr5tz9rGsFH7vXb0GH8vHr8ez3+bb/iN0XdGux8SA6J124QQ9Vf1nZ2dxbuv94DDw0MZkYUfC4sLi+aYaRhGci7ZtZC4GpprQWI64ZbdkyuqM+8IIZwFx9vzqrVqajnV67AAAAAAAACA5sIwbPtV9Iq253Kh/xKAS0HboA5tgza0vQGgHzHboE5HbWPy6Unbc2G2QR3aBnVoG7Sh7Q0A/YjZBnXYSQeQtufCbIM6tA3q0DZoQ9sbAPoRsw3qsJMOIG3PhdkGdWgb1KFt0Ia2NwD0I2Yb1GEnHUDanguzDerQNqhD26ANbW8A6EfMNqjDTjqAtD0XZhvUoW1Qh7ZBG9reANCPmG1Qh510AGl7Lsw2qEPboA5tgza0vQGgHzHboA476QDS9lyYbVCHtkEd2gZtaHsDQD9itkEddtIBpO25MNugDm2DOrQN2tD2BoB+xGyDOuykA0jbc2G2QR3aBnVoG7Sh7Q0A/Wjo/JdpG1oaGmrRoovqRtv65TO79LFXOSr3NgAAAAAAACFSSynf992ya71r9SpD5n6mul/NPc2dk0qHnDIi88/yQRCUdkrRiajWUc3jqF7Fs2ftTqJm7meCv4O1x2thGJrjZkeZgiCITkRTy6nSTqn9D+qMs+AUfyo223Y6lSY5k7eSmU8yMiLzm/n8s7zOUaUpnbuOMWJkv8i6ZbeTqNX9avJWUhii07allo6/xjTNMAxlRLb/WZ1ZfbDabNvpVPrkPOIsOKUXJf2jmqa59tVabiPXdtTcRi4Mw4ODA3vebtm2Fv8lmGOmt+cJIer1euOfxujYaNs/7BKdTqVbzvj1+NHA0DmqNWX5vu/MOyufrrQd9d6H9xqNxo2ZG9s/b7f8xlb/XP137mOvnE6lU87oeDT9UXr9y/UzkugUtfKyMvT20JNvnhS+L5yRpAtRW7StVq9ds64JIcwxU45Iv+53+oWX4XQqfXLKiCz+Wlz5bKXyW0XzqEIIcSjWv163b9pSyt5Hbd4T08vpredb3f2ycwyL1YeruY2cGD47lSY5jRGj9KL06PEjMSw0j5r+OJ1aTsmIzH6e9f/0O4kaBEHs/djRlmBNWsaIYYwYbcY63oF3XWuyN+t6dCIanmBI48xUPc8phMg+yIZhePDvwVFUa8rSNmp0Mlr8pRgEgbvrJmYTbwp2kagn29aUuJlQ8TMAALhK/gcTeAhvfRu6CgAAAABJRU5ErkJggg==||||||F\r";
+            //str += "OBX|47|NM|15111^PLT Histogram. Left Line^99MRC||?||||||F\r";
+            //str += "OBX|48|NM|15112^PLT Histogram. Right Line^99MRC||?||||||F\r";
+            //str += "OBX|49|ED|15116^PLT Histogram. BMP^99MRC||^Image^BMP^Base64^iVBORw0KGgoAAAANSUhEUgAAAM8AAABuCAIAAAAPo9BDAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAA1hAAANYQE8JGIuAAAEEklEQVR4nO3ZP2gbZxjH8VfFwxU03KDhDB584EEKHaLQQhySIYIO1lCIQoYuhXDp4IoOrZwuoksRGYLpUOIUyiWDQRkMplBQCy3xYrgMgXPBIBUM0pDhBB1O0IIKKVwHGeFCGimW9Oit3u9n0x/Ej5cfj55XUgoAAAAAAAAAAAAAAAAAAAD/KX85H8dxs9UMj0I36+Yv5/d/2B+85O/6zZNm/2W/edKs3a/NNycWwbBe3qZX36ufbZtSSlkqiqK5hcP/zVtjvi84DJxlZ6ZRsPDGbVtxo9g6bs00Chbe0sh3FK4VwqOw0+l4n3juqiuQCYtqdNsODg9ufnDz9MHqTMNgwY37TTpUfL/Y7rTbnbabZc4BAAAAAAAAbyRJkjGfxIRMONU3/nUXODfaBjm0DdowYZmAGGYb5JynbQy8WTDhVJltkEPbIIe2QRsmLBMQw2yDHO6kujDhVJltkEPbIIe2QRsmLBMQw2yDHO6kujDhVJltkEPbIIe2QRsmLBMQw2yDHO6kujDhVJltkEPbIIe2QRsmLBMQw2yDHO6kujDhVJltkEPbIIe2QRsmLBMQw2yDHO6kujDhVJltkEPbIIe2QRsmLBMQw2yDHO6kujDhVJltkEPbIIe2QRsmLBMQw2yDHO6kujDhVJltkEPbIIe2QRsmLBMQw2yDHO6kujDhVJltkEPbIIe2QRsmLBMQk3r9y7QNI6VSI1o0rum2jU8z/NPY2wAAAAAAAJTybntRFIVHYe6d3LyzqMrdSvtF23/sD5/RJJ6dset79TiOg2eBu+bqlc05zdZsNQvXC1PPVrlbif+Itx9uJ0nirDoTBY3j2F1zvU0veBZMGGtypVulxo+NYdv0iVfcKFY+q9gZu/6kXt+ra5XNduzShyUrbVW/qoZH4dSztV+0ixtFZalJ2+bdPk3jOE6SJHbGnjDZ5Gr3asO2aRivdKsUPA+Uftkcx9n+Ztvf9aebzd/1kyTp9/uFG4WRbRvxX4Kz4jRPmkqpbrfb+7O3vLJ87lizoGG8S+9dGswPrbLlLuaiKCrdKG19vjXdbHc+utPr9a5cu3Lw08HIN4/65+rv1z6cO83iuatu+ePyztc7rwgz12ytX1upt1OPvnu0//3+K8JIZRvRtk63cyF3QSnlrDh22o66kUiqcWkVz87YjV8aW19stX5r6ZZNKaX+Ujvf7hSuFmzb1i7bwHCdLG+Wnx4+nXccpZZU7X7N3/XVklI6xbPSVvA8ePDwgVpSumUrf1r2Nj07Y1e/rEa/R1PPFsdx/t384JaQy+astGWlrXN+1ulV+TjMZef8C4i75iZnWLalT7zqvWqSJP2X/UG23MWcPtncrNv4uRHHcXgcrl9fHzw5xWxn2za0fnV94uAAAOBf/gEunzZSiZ8LcwAAAABJRU5ErkJggg==||||||F\r";
+            #endregion
+
+            #region 特定蛋白测试串
+
+            string str = "MSH|^~\\&|BIOBASE|BK-PA120|||20221009154449||ORU^R01|1579015008044584960|P|2.3.1||||0||ASCII||\r" +
+                "PID|3551|||||||M|||||||||||||||||1||||||\r" +
+                "OBR|3551|SAACA40018|3551|BIOBASE^BK-PA120|N|20221009151049|20220919160956||||||||1|||0||||20221009151049||||||||||||||||||||||||||\r" +
+                "OBX|4658|NM|1|hs-CRP|0.77|mg/L|0.00-3.00|N|||F||0.77|20221009151049||||\r" +
+                "OBX|4659|NM|2|SAA|5.00|mg/L|0.00-10.00|N|||F||5.00|20221009151049||||\r" +
+                "OBX|4660|NM|3|CRP|0.77|mg/L|0.00-10.00|N|||F||0.77|20221009151049||||\r" +
+                "OBX|4661|NM|4|SAA/hs-CRP|1.18|mg/L||N|||F||1.18|20221009151049||||\r\u001c\r";
+
+            #endregion
 
             ChuLiOneHL7(str);
         }
