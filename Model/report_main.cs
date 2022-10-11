@@ -32,6 +32,12 @@ namespace Maticsoft.Model
 		private string _checkdocname;
 		private string _diagnosis;
 		private string _demo;
+		private string _address;
+		private string _telephone;
+		private string _patid;
+		private string _testtime;
+		private string _sendtime;
+		private string _recievetime;
 		private int? _flag_audit;
 		private int? _flag_print;
 		/// <summary>
@@ -122,6 +128,33 @@ namespace Maticsoft.Model
 			set{ _patbirthday=value;}
 			get{return _patbirthday;}
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string TestTime
+		{
+			set { _testtime = value; }
+			get { return _testtime; }
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string SendTime
+		{
+			set { _sendtime = value; }
+			get { return _sendtime; }
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string RecieveTime
+		{
+			set { _recievetime = value; }
+			get { return _recievetime; }
+		}
 		/// <summary>
 		/// 
 		/// </summary>
@@ -201,6 +234,32 @@ namespace Maticsoft.Model
 		{
 			set{ _diagnosis=value;}
 			get{return _diagnosis;}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string TelePhone
+		{
+			set { _telephone = value; }
+			get { return _telephone; }
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string PatId
+		{
+			set { _patid = value; }
+			get { return _patid; }
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string Address
+		{
+			set { _address = value; }
+			get { return _address; }
 		}
 		/// <summary>
 		/// 

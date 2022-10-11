@@ -41,6 +41,30 @@ namespace Maticsoft.DAL
 			return DbHelperMySQL.Exists(strSql.ToString(), parameters);
 		}
 
+		public bool ExistsByBarcode(string Barcode)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("select count(1) from lismain.report_main");
+			strSql.Append(" where Barcode=@Barcode ");
+			MySqlParameter[] parameters = {
+					new MySqlParameter("@Barcode", MySqlDbType.VarChar,255)            };
+			parameters[0].Value = Barcode;
+
+			return DbHelperMySQL.Exists(strSql.ToString(), parameters);
+		}
+
+		public DataTable QueryByBarcode(string Barcode)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("select reportID from lismain.report_main");
+			strSql.Append(" where Barcode=@Barcode ");
+			MySqlParameter[] parameters = {
+					new MySqlParameter("@Barcode", MySqlDbType.VarChar,255)            };
+			parameters[0].Value = Barcode;
+
+			return DbHelperMySQL.Query(strSql.ToString(), parameters).Tables[0];
+		}
+
 		public DataTable QueryBySampleNo(string SampleNo)
 		{
 			StringBuilder strSql = new StringBuilder();
@@ -62,9 +86,9 @@ namespace Maticsoft.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into lismain.report_main(");
-			strSql.Append("ReportID,Barcode,SampleNo,PatType,PatName,PatSex,PatAge,PatDept,BedNo,RoomNo,PatBirthday,SampleType,SendDocID,SendDocName,TestID,TestName,TestDocID,TestDocName,CheckDocID,CheckDocName,Diagnosis,Demo,Flag_Audit,Flag_Print)");
+			strSql.Append("ReportID,Barcode,SampleNo,PatType,PatName,PatSex,PatAge,PatDept,BedNo,RoomNo,PatBirthday,SampleType,SendDocID,SendDocName,TestID,TestName,TestDocID,TestDocName,CheckDocID,CheckDocName,Diagnosis,Demo,Flag_Audit,Flag_Print,Address,TelePhone,PatId,SendTime,RecieveTime,TestTime)");
 			strSql.Append(" values (");
-			strSql.Append("@ReportID,@Barcode,@SampleNo,@PatType,@PatName,@PatSex,@PatAge,@PatDept,@BedNo,@RoomNo,@PatBirthday,@SampleType,@SendDocID,@SendDocName,@TestID,@TestName,@TestDocID,@TestDocName,@CheckDocID,@CheckDocName,@Diagnosis,@Demo,@Flag_Audit,@Flag_Print)");
+			strSql.Append("@ReportID,@Barcode,@SampleNo,@PatType,@PatName,@PatSex,@PatAge,@PatDept,@BedNo,@RoomNo,@PatBirthday,@SampleType,@SendDocID,@SendDocName,@TestID,@TestName,@TestDocID,@TestDocName,@CheckDocID,@CheckDocName,@Diagnosis,@Demo,@Flag_Audit,@Flag_Print,@Address,@TelePhon,@PatId,@SendTime,@RecieveTime,@TestTime)");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@ReportID", MySqlDbType.VarChar,255),
 					new MySqlParameter("@Barcode", MySqlDbType.VarChar,255),
@@ -89,7 +113,13 @@ namespace Maticsoft.DAL
 					new MySqlParameter("@Diagnosis", MySqlDbType.VarChar,255),
 					new MySqlParameter("@Demo", MySqlDbType.VarChar,255),
 					new MySqlParameter("@Flag_Audit", MySqlDbType.Int32,11),
-					new MySqlParameter("@Flag_Print", MySqlDbType.Int32,11)};
+					new MySqlParameter("@Flag_Print", MySqlDbType.Int32,11),
+					new MySqlParameter("@Address", MySqlDbType.VarChar,255),
+					new MySqlParameter("@TelePhon", MySqlDbType.VarChar,255),
+					new MySqlParameter("@PatId", MySqlDbType.VarChar,255),
+			new MySqlParameter("@SendTime", MySqlDbType.VarChar,255),
+			new MySqlParameter("@RecieveTime", MySqlDbType.VarChar,255),
+			new MySqlParameter("@TestTime", MySqlDbType.VarChar,255)};
 			parameters[0].Value = model.ReportID;
 			parameters[1].Value = model.Barcode;
 			parameters[2].Value = model.SampleNo;
@@ -114,6 +144,12 @@ namespace Maticsoft.DAL
 			parameters[21].Value = model.Demo;
 			parameters[22].Value = model.Flag_Audit;
 			parameters[23].Value = model.Flag_Print;
+			parameters[24].Value = model.Address;
+			parameters[25].Value = model.TelePhone;
+			parameters[26].Value = model.PatId;
+			parameters[27].Value = model.SendTime;
+			parameters[28].Value = model.RecieveTime;
+			parameters[29].Value = model.TestTime;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -154,7 +190,13 @@ namespace Maticsoft.DAL
 			strSql.Append("Diagnosis=@Diagnosis,");
 			strSql.Append("Demo=@Demo,");
 			strSql.Append("Flag_Audit=@Flag_Audit,");
-			strSql.Append("Flag_Print=@Flag_Print");
+			strSql.Append("Flag_Print=@Flag_Print,");
+			strSql.Append("Address=@Address,");
+			strSql.Append("TelePhone=@TelePhone,");
+			strSql.Append("PatId=@PatId,");
+			strSql.Append("SendTime=@SendTime,");
+			strSql.Append("RecieveTime=@RecieveTime,");
+			strSql.Append("TestTime=@TestTime");
 			strSql.Append(" where ReportID=@ReportID ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@Barcode", MySqlDbType.VarChar,255),
@@ -180,6 +222,12 @@ namespace Maticsoft.DAL
 					new MySqlParameter("@Demo", MySqlDbType.VarChar,255),
 					new MySqlParameter("@Flag_Audit", MySqlDbType.Int32,11),
 					new MySqlParameter("@Flag_Print", MySqlDbType.Int32,11),
+					new MySqlParameter("@Address", MySqlDbType.VarChar,255),
+					new MySqlParameter("@TelePhone", MySqlDbType.VarChar,255),
+					new MySqlParameter("@PatId", MySqlDbType.VarChar,255),
+					new MySqlParameter("@SendTime", MySqlDbType.VarChar,255),
+					new MySqlParameter("@RecieveTime", MySqlDbType.VarChar,255),
+					new MySqlParameter("@TestTime", MySqlDbType.VarChar,255),
 					new MySqlParameter("@ReportID", MySqlDbType.VarChar,255)};
 			parameters[0].Value = model.Barcode;
 			parameters[1].Value = model.SampleNo;
@@ -204,7 +252,13 @@ namespace Maticsoft.DAL
 			parameters[20].Value = model.Demo;
 			parameters[21].Value = model.Flag_Audit;
 			parameters[22].Value = model.Flag_Print;
-			parameters[23].Value = model.ReportID;
+			parameters[23].Value = model.Address;
+			parameters[24].Value = model.TelePhone;
+			parameters[25].Value = model.PatId;
+			parameters[26].Value = model.SendTime;
+			parameters[27].Value = model.RecieveTime;
+			parameters[28].Value = model.TestTime;
+			parameters[29].Value = model.ReportID;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -267,7 +321,7 @@ namespace Maticsoft.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select ReportID,Barcode,SampleNo,PatType,PatName,PatSex,PatAge,PatDept,BedNo,RoomNo,PatBirthday,SampleType,SendDocID,SendDocName,TestID,TestName,TestDocID,TestDocName,CheckDocID,CheckDocName,Diagnosis,Demo,Flag_Audit,Flag_Print from lismain.report_main ");
+			strSql.Append("select ReportID,Barcode,SampleNo,PatType,PatName,PatSex,PatAge,PatDept,BedNo,RoomNo,PatBirthday,SampleType,SendDocID,SendDocName,TestID,TestName,TestDocID,TestDocName,CheckDocID,CheckDocName,Diagnosis,Demo,Flag_Audit,Flag_Print,Address,TelePhone,PatId,SendTime,RecieveTime,TestTime from lismain.report_main ");
 			strSql.Append(" where ReportID=@ReportID ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@ReportID", MySqlDbType.VarChar,255)			};
@@ -382,7 +436,31 @@ namespace Maticsoft.DAL
 				{
 					model.Demo=row["Demo"].ToString();
 				}
-				if(row["Flag_Audit"]!=null && row["Flag_Audit"].ToString()!="")
+				if (row["Address"] != null)
+				{
+					model.Address = row["Address"].ToString();
+				}
+				if (row["TelePhone"] != null)
+				{
+					model.TelePhone = row["TelePhone"].ToString();
+				}
+				if (row["PatId"] != null)
+				{
+					model.PatId = row["PatId"].ToString();
+				}
+				if (row["SendTime"] != null)
+				{
+					model.SendTime = row["SendTime"].ToString();
+				}
+				if (row["RecieveTime"] != null)
+				{
+					model.RecieveTime = row["RecieveTime"].ToString();
+				}
+				if (row["TestTime"] != null)
+				{
+					model.TestTime = row["TestTime"].ToString();
+				}
+				if (row["Flag_Audit"]!=null && row["Flag_Audit"].ToString()!="")
 				{
 					model.Flag_Audit=int.Parse(row["Flag_Audit"].ToString());
 				}
@@ -411,7 +489,7 @@ namespace Maticsoft.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select ReportID,Barcode,SampleNo,PatType,PatName,PatSex,PatAge,PatDept,BedNo,RoomNo,PatBirthday,SampleType,SendDocID,SendDocName,TestID,TestName,TestDocID,TestDocName,CheckDocID,CheckDocName,Diagnosis,Demo,Flag_Audit,Flag_Print ");
+			strSql.Append("select ReportID,Barcode,SampleNo,PatType,PatName,PatSex,PatAge,PatDept,BedNo,RoomNo,PatBirthday,SampleType,SendDocID,SendDocName,TestID,TestName,TestDocID,TestDocName,CheckDocID,CheckDocName,Diagnosis,Demo,Flag_Audit,Flag_Print,Address,TelePhone,PatId,SendTime,RecieveTime,TestTime ");
 			strSql.Append(" FROM lismain.report_main ");
 			if(strWhere.Trim()!="")
 			{
