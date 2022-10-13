@@ -112,9 +112,12 @@
     <Compile Include="equipbase.cs" />
     <Compile Include="item.cs" />
     <Compile Include="report_detail.cs" />
+    <Compile Include="report_detail_undudit.cs" />
     <Compile Include="report_graph.cs" />
     <Compile Include="report_main.cs" />
+    <Compile Include="report_main_unaudit.cs" />
     <Compile Include="sampleclass.cs" />
+    <Compile Include="samplemain.cs" />
     <Compile Include="testlist.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

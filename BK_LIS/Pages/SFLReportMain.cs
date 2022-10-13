@@ -21,6 +21,7 @@ namespace BK_LIS.Pages
     public partial class SFLReportMain : UIPage
     {
         string strReportID = "";
+        string INSTRUMENT = "SFL";
         public SFLReportMain()
         {
             InitializeComponent();
@@ -32,8 +33,10 @@ namespace BK_LIS.Pages
         #region 初始化加载数据
         public void GetLeftData()
         {
-            Maticsoft.BLL.report_main report_mainDal = new Maticsoft.BLL.report_main();  //声明对象          
-            uiDataGridView1.DataSource = report_mainDal.GetLeftList().Tables[0];//赋值
+            Maticsoft.BLL.report_main_unaudit report_main_unauditDal = new Maticsoft.BLL.report_main_unaudit();  //声明对象
+
+            string strWhere = "INSTRUMENT = '" + INSTRUMENT + "'";
+            uiDataGridView1.DataSource = report_main_unauditDal.GetLeftList(strWhere).Tables[0];//赋值
 
             //设置列的列标题
             uiDataGridView1.Columns[0].HeaderText = "报告单号";
@@ -54,30 +57,31 @@ namespace BK_LIS.Pages
                 strReportID = uiDataGridView1.Rows[index].Cells[0].Value.ToString();//用于查询对应数据内容
 
 
-                Maticsoft.BLL.report_main report_mainDal = new Maticsoft.BLL.report_main();  //声明对象          
-                Maticsoft.Model.report_main main =  report_mainDal.GetModel(strReportID);//赋值
+                Maticsoft.BLL.report_main_unaudit report_main_unauditDal = new Maticsoft.BLL.report_main_unaudit();  //声明对象          
+                Maticsoft.Model.report_main_unaudit main = report_main_unauditDal.GetModel(strReportID);//赋值
 
                 #region 页面上方控件赋值
-                uiSampleNotext.Text = main.SampleNo;
-                uiTextBox2.Text = main.SampleType;//样本类型
-                uiTextBox3.Text = main.Barcode;//病历号
-                uiTextBox5.Text = main.TestDocName;//检验医师
-                uiTextBox25.Text = main.PatName;//姓名
-                uiTextBox1.Text = main.PatSex;//性别
-                uiTextBox23.Text = main.PatBirthday;//生日
-                uiTextBox22.Text = main.PatAge;//年龄
-                uiTextBox19.Text = main.CheckDocName;//审核医生
-                uiTextBox6.Text = main.PatDept;//科室
-                uiTextBox7.Text = main.RoomNo;//房间号
-                uiTextBox21.Text = main.BedNo;//床号
-                uiTextBox4.Text = main.SendDocName;//送检人员
-                uiTextBox10.Text = main.Demo;//备注
+                uiSampleNotext.Text = main.SAMPLENO;
+                uiTextBox2.Text = main.SAMPLEType;//样本类型
+                uiTextBox3.Text = main.PAT_NO;//病历号
+                uiTextBox5.Text = main.TEST_User;//检验医师
+                uiTextBox25.Text = main.PAT_NAME;//姓名
+                uiTextBox1.Text = main.PAT_SEX;//性别
+                uiTextBox23.Text = main.PAT_Birthday;//生日
+                uiTextBox22.Text = main.PAT_AGE;//年龄
+                uiTextBox8.Text = main.PAT_AGEUnit;//年龄单位
+                uiTextBox19.Text = main.CHECK_User;//审核医生
+                uiTextBox6.Text = main.PAT_DEPTName;//科室
+                uiTextBox7.Text = main.ROOM;//病室
+                uiTextBox21.Text = main.BED;//床号
+                uiTextBox4.Text = main.Send_User;//送检人员
+                uiTextBox10.Text = main.DocMemo;//备注
                 #endregion
 
                 #region 根据报告单获取明细
-                Maticsoft.BLL.report_detail report_detailDal = new Maticsoft.BLL.report_detail();  //声明对象
-                string strWhere = "ReportId = '"+ strReportID + "'";
-                uiDataGridView2.DataSource = report_detailDal.GetRightList(strWhere).Tables[0];//赋值
+                Maticsoft.BLL.report_detail_undudit report_detail_unduditDal = new Maticsoft.BLL.report_detail_undudit();  //声明对象
+                string strWhere = "KeyNo_Group = '" + strReportID + "'";
+                uiDataGridView2.DataSource = report_detail_unduditDal.GetRightList(strWhere).Tables[0];//赋值
                 //设置列的列标题
                 uiDataGridView2.Columns[0].HeaderText = "项目编号";
                 uiDataGridView2.Columns[1].HeaderText = "项目名称";
@@ -91,6 +95,7 @@ namespace BK_LIS.Pages
                 #region 读取数据库 base64编码的图片
                 byte[] bytefile;
                 Maticsoft.BLL.report_graph report_graph = new Maticsoft.BLL.report_graph();  //声明对象               
+                strWhere = "ReportId = '" + strReportID + "'";
                 DataTable dt = report_graph.GetList(strWhere).Tables[0];//赋值
                 if (dt.Rows.Count > 0)
                 {
@@ -112,5 +117,10 @@ namespace BK_LIS.Pages
             };
         }
         #endregion
+
+        private void uiButton1_Click(object sender, EventArgs e)
+        {
+            GetLeftData();//加载网格数据
+        }
     }
 }
