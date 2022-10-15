@@ -87,9 +87,9 @@ namespace Maticsoft.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into lismain.report_main_unaudit(");
-			strSql.Append("REPORT_ID,RptTypeID,REPORT_NAME,BARCODE,REG_TYPE,CREATE_DATE,BarcodeTime,RegTime,KeyNo_Group,OUT_PAT_ID,PAT_ID,PAT_NO,PAT_IN_HOS_ID,PAT_NAME,PAT_SEX,PAT_AGE,PAT_AGEUnit,PAT_Birthday,PAT_Type,PAT_DEPTID,PAT_DEPTName,ROOM,BED,TestMemo,REQ_NO,REQ_DOC,DoctorID,DoctorName,INSTRUMENT,TEST_DATE,SAMPLENO,SAMPLEType,TestList,TEST_UserID,TEST_User,CHECK_UserID,CHECK_User,REPORT_TIME,HOSPITAL_ID,FALG_Emergency,FLAG_PRINT_LAB,DocMemo,CardNO,PAT_IDCARD,Send_UserID,Send_User,Diagnosis,Address,Telephone,BloodType)");
+			strSql.Append("REPORT_ID,RptTypeID,REPORT_NAME,BARCODE,REG_TYPE,CREATE_DATE,BarcodeTime,RegTime,KeyNo_Group,OUT_PAT_ID,PAT_ID,PAT_NO,PAT_IN_HOS_ID,PAT_NAME,PAT_SEX,PAT_AGE,PAT_AGEUnit,PAT_Birthday,PAT_Type,PAT_DEPTID,PAT_DEPTName,ROOM,BED,TestMemo,REQ_NO,REQ_DOC,DoctorID,DoctorName,INSTRUMENT,TEST_DATE,SAMPLENO,SAMPLEType,TestList,TEST_UserID,TEST_User,CHECK_UserID,CHECK_User,REPORT_TIME,HOSPITAL_ID,FALG_Emergency,FLAG_PRINT_LAB,DocMemo,CardNO,PAT_IDCARD,Send_UserID,Send_User,Diagnosis,Address,Telephone,BloodType,RefGroupID)");
 			strSql.Append(" values (");
-			strSql.Append("@REPORT_ID,@RptTypeID,@REPORT_NAME,@BARCODE,@REG_TYPE,@CREATE_DATE,@BarcodeTime,@RegTime,@KeyNo_Group,@OUT_PAT_ID,@PAT_ID,@PAT_NO,@PAT_IN_HOS_ID,@PAT_NAME,@PAT_SEX,@PAT_AGE,@PAT_AGEUnit,@PAT_Birthday,@PAT_Type,@PAT_DEPTID,@PAT_DEPTName,@ROOM,@BED,@TestMemo,@REQ_NO,@REQ_DOC,@DoctorID,@DoctorName,@INSTRUMENT,@TEST_DATE,@SAMPLENO,@SAMPLEType,@TestList,@TEST_UserID,@TEST_User,@CHECK_UserID,@CHECK_User,@REPORT_TIME,@HOSPITAL_ID,@FALG_Emergency,@FLAG_PRINT_LAB,@DocMemo,@CardNO,@PAT_IDCARD,@Send_UserID,@Send_User,@Diagnosis,@Address,@Telephone,@BloodType)");
+			strSql.Append("@REPORT_ID,@RptTypeID,@REPORT_NAME,@BARCODE,@REG_TYPE,@CREATE_DATE,@BarcodeTime,@RegTime,@KeyNo_Group,@OUT_PAT_ID,@PAT_ID,@PAT_NO,@PAT_IN_HOS_ID,@PAT_NAME,@PAT_SEX,@PAT_AGE,@PAT_AGEUnit,@PAT_Birthday,@PAT_Type,@PAT_DEPTID,@PAT_DEPTName,@ROOM,@BED,@TestMemo,@REQ_NO,@REQ_DOC,@DoctorID,@DoctorName,@INSTRUMENT,@TEST_DATE,@SAMPLENO,@SAMPLEType,@TestList,@TEST_UserID,@TEST_User,@CHECK_UserID,@CHECK_User,@REPORT_TIME,@HOSPITAL_ID,@FALG_Emergency,@FLAG_PRINT_LAB,@DocMemo,@CardNO,@PAT_IDCARD,@Send_UserID,@Send_User,@Diagnosis,@Address,@Telephone,@BloodType,@RefGroupID)");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@REPORT_ID", MySqlDbType.VarChar,255),
 					new MySqlParameter("@RptTypeID", MySqlDbType.Int32,4),
@@ -140,7 +140,8 @@ namespace Maticsoft.DAL
 					new MySqlParameter("@Diagnosis", MySqlDbType.VarChar,255),
 					new MySqlParameter("@Address", MySqlDbType.VarChar,255),
 					new MySqlParameter("@Telephone", MySqlDbType.VarChar,255),
-					new MySqlParameter("@BloodType", MySqlDbType.VarChar,255)
+					new MySqlParameter("@BloodType", MySqlDbType.VarChar,255),
+					new MySqlParameter("@RefGroupID", MySqlDbType.Int32,4)
 			};
 			parameters[0].Value = model.REPORT_ID;
 			parameters[1].Value = model.RptTypeID;
@@ -194,6 +195,8 @@ namespace Maticsoft.DAL
 			parameters[47].Value = model.Address;
 			parameters[48].Value = model.Telephone;
 			parameters[49].Value = model.BloodType;
+			parameters[50].Value = model.RefGroupID;
+
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
 			{
@@ -259,7 +262,8 @@ namespace Maticsoft.DAL
 			strSql.Append("Diagnosis=@Diagnosis,");
 			strSql.Append("Address=@Address,");
 			strSql.Append("Telephone=@Telephone,");
-			strSql.Append("BloodType=@BloodType");
+			strSql.Append("BloodType=@BloodType,");
+			strSql.Append("RefGroupID=@RefGroupID");
 			strSql.Append(" where REPORT_ID=@REPORT_ID ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@RptTypeID", MySqlDbType.Int32,4),
@@ -311,6 +315,7 @@ namespace Maticsoft.DAL
 					new MySqlParameter("@Address", MySqlDbType.VarChar,255),
 					new MySqlParameter("@Telephone", MySqlDbType.VarChar,255),
 					new MySqlParameter("@BloodType", MySqlDbType.VarChar,255),
+					new MySqlParameter("@RefGroupID",MySqlDbType.Int32,4),
 					new MySqlParameter("@REPORT_ID", MySqlDbType.VarChar,255)};
 			parameters[0].Value = model.RptTypeID;
 			parameters[1].Value = model.REPORT_NAME;
@@ -361,7 +366,8 @@ namespace Maticsoft.DAL
 			parameters[46].Value = model.Address;
 			parameters[47].Value = model.Telephone;
 			parameters[48].Value = model.BloodType;
-			parameters[49].Value = model.REPORT_ID;
+			parameters[49].Value = model.RefGroupID;
+			parameters[50].Value = model.REPORT_ID;
 
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -424,7 +430,8 @@ namespace Maticsoft.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select REPORT_ID,RptTypeID,REPORT_NAME,BARCODE,REG_TYPE,CREATE_DATE,BarcodeTime,RegTime,KeyNo_Group,OUT_PAT_ID,PAT_ID,PAT_NO,PAT_IN_HOS_ID,PAT_NAME,PAT_SEX,PAT_AGE,PAT_AGEUnit,PAT_Birthday,PAT_Type,PAT_DEPTID,PAT_DEPTName,ROOM,BED,TestMemo,REQ_NO,REQ_DOC,DoctorID,DoctorName,INSTRUMENT,TEST_DATE,SAMPLENO,SAMPLEType,TestList,TEST_UserID,TEST_User,CHECK_UserID,CHECK_User,REPORT_TIME,HOSPITAL_ID,FALG_Emergency,FLAG_PRINT_LAB,DocMemo,CardNO,PAT_IDCARD,Send_UserID,Send_User, Diagnosis,Address,Telephone,BloodType from lismain.report_main_unaudit ");
+			strSql.Append("select REPORT_ID,RptTypeID,REPORT_NAME,BARCODE,REG_TYPE,CREATE_DATE,BarcodeTime,RegTime,KeyNo_Group,OUT_PAT_ID,PAT_ID,PAT_NO,PAT_IN_HOS_ID,PAT_NAME,PAT_SEX,PAT_AGE,PAT_AGEUnit,PAT_Birthday,PAT_Type,PAT_DEPTID,PAT_DEPTName,ROOM,BED,TestMemo,REQ_NO,REQ_DOC,DoctorID,DoctorName,INSTRUMENT,TEST_DATE,SAMPLENO,SAMPLEType,TestList,TEST_UserID,TEST_User,CHECK_UserID,CHECK_User,REPORT_TIME,HOSPITAL_ID,FALG_Emergency,FLAG_PRINT_LAB,DocMemo,CardNO,PAT_IDCARD,Send_UserID,Send_User, Diagnosis,Address,Telephone,BloodType,RefGroupID ,B.DicItemName  from lismain.report_main_unaudit AS  A ");
+			strSql.Append(" LEFT JOIN lismain.classtype AS B ON A.RefGroupID = B.DicItemCode AND DicCode = 4");
 			strSql.Append(" where REPORT_ID=@REPORT_ID ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@REPORT_ID", MySqlDbType.VarChar,255)			};
@@ -467,7 +474,11 @@ namespace Maticsoft.DAL
 				{
 					model.BARCODE=row["BARCODE"].ToString();
 				}
-				if(row["REG_TYPE"]!=null && row["REG_TYPE"].ToString()!="")
+				if (row["RefGroupID"] != null && row["RefGroupID"].ToString() != "")
+				{
+					model.RefGroupID = int.Parse(row["RefGroupID"].ToString());
+				}
+				if (row["REG_TYPE"]!=null && row["REG_TYPE"].ToString()!="")
 				{
 					model.REG_TYPE=int.Parse(row["REG_TYPE"].ToString());
 				}
@@ -651,6 +662,11 @@ namespace Maticsoft.DAL
 				{
 					model.BloodType = row["BloodType"].ToString();
 				}
+				if (row["DicItemName"] != null)
+				{
+					model.DicItemName = row["DicItemName"].ToString();
+				}
+				
 			}
 			return model;
 		}
@@ -677,7 +693,7 @@ namespace Maticsoft.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select REPORT_ID,RptTypeID,REPORT_NAME,BARCODE,REG_TYPE,CREATE_DATE,BarcodeTime,RegTime,KeyNo_Group,OUT_PAT_ID,PAT_ID,PAT_NO,PAT_IN_HOS_ID,PAT_NAME,PAT_SEX,PAT_AGE,PAT_AGEUnit,PAT_Birthday,PAT_Type,PAT_DEPTID,PAT_DEPTName,ROOM,BED,TestMemo,REQ_NO,REQ_DOC,DoctorID,DoctorName,INSTRUMENT,TEST_DATE,SAMPLENO,SAMPLEType,TestList,TEST_UserID,TEST_User,CHECK_UserID,CHECK_User,REPORT_TIME,HOSPITAL_ID,FALG_Emergency,FLAG_PRINT_LAB,DocMemo,CardNO,PAT_IDCARD,Send_UserID,Send_User ,Diagnosis,Address,Telephone,BloodType");
+			strSql.Append("select REPORT_ID,RptTypeID,REPORT_NAME,BARCODE,REG_TYPE,CREATE_DATE,BarcodeTime,RegTime,KeyNo_Group,OUT_PAT_ID,PAT_ID,PAT_NO,PAT_IN_HOS_ID,PAT_NAME,PAT_SEX,PAT_AGE,PAT_AGEUnit,PAT_Birthday,PAT_Type,PAT_DEPTID,PAT_DEPTName,ROOM,BED,TestMemo,REQ_NO,REQ_DOC,DoctorID,DoctorName,INSTRUMENT,TEST_DATE,SAMPLENO,SAMPLEType,TestList,TEST_UserID,TEST_User,CHECK_UserID,CHECK_User,REPORT_TIME,HOSPITAL_ID,FALG_Emergency,FLAG_PRINT_LAB,DocMemo,CardNO,PAT_IDCARD,Send_UserID,Send_User ,Diagnosis,Address,Telephone,BloodType,RefGroupID");
 			strSql.Append(" FROM lismain.report_main_unaudit ");
 			if(strWhere.Trim()!="")
 			{

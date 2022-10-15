@@ -12,6 +12,7 @@ namespace Maticsoft.Model
 		#region Model
 		private string _report_id;
 		private int? _rpttypeid;
+		private int? _refgroupid;
 		private string _report_name;
 		private string _barcode;
 		private int? _reg_type;
@@ -59,12 +60,12 @@ namespace Maticsoft.Model
 		private string _diagnosis;
         private string _address;
         private string _bloodType;
-        private string _telephone;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public string REPORT_ID
+        private string _telephone; 
+		private string _dicItemName;
+		/// <summary>
+		/// 
+		/// </summary>
+		public string REPORT_ID
 		{
 			set{ _report_id=value;}
 			get{return _report_id;}
@@ -77,6 +78,15 @@ namespace Maticsoft.Model
 			set{ _rpttypeid=value;}
 			get{return _rpttypeid;}
 		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public int? RefGroupID
+		{
+			set { _refgroupid = value; }
+			get { return _refgroupid; }
+		}
+		
 		/// <summary>
 		/// 
 		/// </summary>
@@ -462,6 +472,14 @@ namespace Maticsoft.Model
 		{
 			set { _bloodType = value; }
 			get { return _bloodType; }
+		}
+		/// <summary>
+		/// 
+		/// </summary>
+		public string DicItemName
+		{
+			set { _dicItemName = value; }
+			get { return _dicItemName; }
 		}
 		#endregion Model
 

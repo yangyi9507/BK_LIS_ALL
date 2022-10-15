@@ -86,7 +86,13 @@ namespace Maticsoft.BLL
 			}
 			return (Maticsoft.Model.report_detail_undudit)objModel;
 		}
-
+		/// <summary>
+		/// 获得数据列表
+		/// </summary>
+		public DataSet GetReportList(string strWhere)
+		{
+			return dal.GetReportList(strWhere);
+		}
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
@@ -94,7 +100,7 @@ namespace Maticsoft.BLL
 		{
 			return dal.GetRightList(strWhere);
 		}
-
+		
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>

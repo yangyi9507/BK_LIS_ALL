@@ -310,6 +310,21 @@ namespace Maticsoft.DAL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
+		public DataSet GetReportList(string strWhere)
+		{
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("select CONCAT(ITEM_ID,'(',ITEM_NAME,')') As ITEM_ENAME ,RESULT,UNIT,REFRANGE,Abnormal_flg");
+			strSql.Append(" FROM lismain.report_detail_undudit ");
+			if (strWhere.Trim() != "")
+			{
+				strSql.Append(" where " + strWhere);
+			}
+			return DbHelperMySQL.Query(strSql.ToString());
+		}
+
+		/// <summary>
+		/// 获得数据列表
+		/// </summary>
 		public DataSet GetRightList(string strWhere)
 		{
 			StringBuilder strSql = new StringBuilder();

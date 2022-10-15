@@ -33,6 +33,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FastReport, Version=1.2.69.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>PrintModel\FastReport.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Bars, Version=1.2.69.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>PrintModel\FastReport.Bars.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Editor, Version=1.2.69.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>PrintModel\FastReport.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Maticsoft.BLL">
       <HintPath>..\BLL\bin\Debug\Maticsoft.BLL.dll</HintPath>
     </Reference>
@@ -69,6 +81,10 @@
       <HintPath>packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>PrintModel\System.Windows.Forms.DataVisualization.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -195,6 +211,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
+    <None Include="PrintModel\MicplateLayoutll" />
+    <None Include="PrintModel\MicplateLayout\A4.frx" />
+    <None Include="PrintModel\MicplateLayout\MicplateLayoutll" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -209,6 +228,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PrintModel\Designer.exe" />
+    <Content Include="PrintModel\FastReport.Bars.dll" />
+    <Content Include="PrintModel\FastReport.dll" />
+    <Content Include="PrintModel\FastReport.Editor.dll" />
+    <Content Include="PrintModel\MicplateLayout\Designer.exe" />
+    <Content Include="PrintModel\MicplateLayout\FastReport.Bars.dll" />
+    <Content Include="PrintModel\MicplateLayout\FastReport.dll" />
+    <Content Include="PrintModel\MicplateLayout\FastReport.Editor.dll" />
+    <Content Include="PrintModel\MicplateLayout\System.Windows.Forms.DataVisualization.dll" />
+    <Content Include="PrintModel\System.Windows.Forms.DataVisualization.dll" />
     <Content Include="Resources\1.png" />
     <Content Include="Resources\2.png" />
     <Content Include="Resources\3.png" />

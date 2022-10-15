@@ -18,17 +18,15 @@ namespace BK_LIS
         public LisMainFrm()
         {
             InitializeComponent();
-            uiTabControl1.TabPages.Clear();
-            AddPage(new ReportMain());
+            uiTabControl1.TabPages.Clear();            
             AddPage(new SFLReportMain());
             SelectPage(1000);
         }
 
         private void uiHeaderButton1_Click(object sender, EventArgs e)
         {
-            uiTabControl1.TabPages.Clear();
-            AddPage(new ReportMain());
-            AddPage(new SFLReportMain());
+            uiTabControl1.TabPages.Clear();            
+            AddPage(new SFLReportMain());            
             SelectPage(1000);
         }
 
