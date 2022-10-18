@@ -130,6 +130,7 @@ namespace BK_LIS
             this.uiHeaderButton5.Text = "系统设置";
             this.uiHeaderButton5.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiHeaderButton5.TipsForeColor = System.Drawing.Color.Transparent;
+            this.uiHeaderButton5.Visible = false;
             this.uiHeaderButton5.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiHeaderButton4
@@ -160,6 +161,7 @@ namespace BK_LIS
             this.uiHeaderButton4.Text = "查询";
             this.uiHeaderButton4.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiHeaderButton4.TipsForeColor = System.Drawing.Color.Transparent;
+            this.uiHeaderButton4.Visible = false;
             this.uiHeaderButton4.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiHeaderButton1
@@ -221,6 +223,7 @@ namespace BK_LIS
             this.uiHeaderButton2.Text = "报告";
             this.uiHeaderButton2.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiHeaderButton2.TipsForeColor = System.Drawing.Color.Transparent;
+            this.uiHeaderButton2.Visible = false;
             this.uiHeaderButton2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiHeaderButton3
@@ -251,6 +254,7 @@ namespace BK_LIS
             this.uiHeaderButton3.Text = "通信设置";
             this.uiHeaderButton3.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiHeaderButton3.TipsForeColor = System.Drawing.Color.Transparent;
+            this.uiHeaderButton3.Visible = false;
             this.uiHeaderButton3.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             this.uiHeaderButton3.Click += new System.EventHandler(this.uiHeaderButton3_Click);
             // 

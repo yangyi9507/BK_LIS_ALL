@@ -35,7 +35,7 @@ namespace BK_LIS
             uiTabControl1.TabPages.Clear();
             AddPage(new ItemBase());
             AddPage(new SampleClassBase());
-            AddPage(new DicItemModel());
+            //AddPage(new DicItemModel());
             AddPage(new TestListBase());
             AddPage(new DeptBase());
             AddPage(new DocBase());
