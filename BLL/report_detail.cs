@@ -73,15 +73,6 @@ namespace Maticsoft.BLL
 			return (Maticsoft.Model.report_detail)objModel;
 		}
 
-
-		/// <summary>
-		/// 获得数据列表
-		/// </summary>
-		public DataSet GetRightList(string strWhere)
-		{
-			return dal.GetRightList(strWhere);
-		}
-
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>

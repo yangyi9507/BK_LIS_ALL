@@ -31,6 +31,7 @@ namespace BK_LIS
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LisMainFrm));
             this.uiTableLayoutPanel2 = new Sunny.UI.UITableLayoutPanel();
             this.uiHeaderButton6 = new Sunny.UI.UIHeaderButton();
             this.uiHeaderButton5 = new Sunny.UI.UIHeaderButton();
@@ -220,10 +221,9 @@ namespace BK_LIS
             this.uiHeaderButton2.Symbol = 0;
             this.uiHeaderButton2.SymbolColor = System.Drawing.Color.Transparent;
             this.uiHeaderButton2.TabIndex = 1;
-            this.uiHeaderButton2.Text = "报告";
+            this.uiHeaderButton2.Text = "关闭";
             this.uiHeaderButton2.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiHeaderButton2.TipsForeColor = System.Drawing.Color.Transparent;
-            this.uiHeaderButton2.Visible = false;
             this.uiHeaderButton2.ZoomScaleRect = new System.Drawing.Rectangle(0, 0, 0, 0);
             // 
             // uiHeaderButton3
@@ -316,6 +316,7 @@ namespace BK_LIS
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1802, 813);
             this.Controls.Add(this.uiTableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainTabControl = this.uiTabControl1;
             this.Name = "LisMainFrm";
             this.Text = "LisMainFrm";
@@ -323,7 +324,7 @@ namespace BK_LIS
             this.ZoomScaleRect = new System.Drawing.Rectangle(22, 22, 800, 450);
             this.uiTableLayoutPanel2.ResumeLayout(false);
             this.uiTableLayoutPanel1.ResumeLayout(false);
-            this.uiTabControl1.ResumeLayout(false);
+            this.uiTabControl1.ResumeLayout(false);            
             this.ResumeLayout(false);
 
         }

@@ -23,6 +23,7 @@ namespace BK_LIS.Pages
 {
     public partial class SFLReportMain : UIPage
     {
+        Maticsoft.Model.report_main_unaudit main = null;
         string strReportID = "";        
         public SFLReportMain()
         {
@@ -38,14 +39,20 @@ namespace BK_LIS.Pages
             Maticsoft.BLL.report_main_unaudit report_main_unauditDal = new Maticsoft.BLL.report_main_unaudit();  //声明对象
 
             string strWhere = "";
-
+            string strAuditFlg = "";//是否查看审核报告的标志
             switch (uiComboBox3.SelectedIndex)
             {
                 case 0: break;
-                case 1: strWhere = "INSTRUMENT = 'SFL'"; break;
-                case 2: strWhere = "INSTRUMENT = 'TDDB'"; break;                
-            }                       
-            uiDataGridView1.DataSource = report_main_unauditDal.GetLeftList(strWhere).Tables[0];//赋值
+                case 1: strWhere += "INSTRUMENT = 'SFL'"; break;
+                case 2: strWhere += "INSTRUMENT = 'TDDB'"; break;                
+            }
+            switch (uiComboBox1.SelectedIndex)
+            {
+                case 0: break;
+                case 1: strAuditFlg = "0"; break;
+                case 2: strAuditFlg = "1"; break;
+            }
+            uiDataGridView1.DataSource = report_main_unauditDal.GetLeftList(strWhere, strAuditFlg).Tables[0];//赋值
 
             //设置列的列标题
             uiDataGridView1.Columns[0].HeaderText = "报告单号";
@@ -67,8 +74,8 @@ namespace BK_LIS.Pages
 
 
                 Maticsoft.BLL.report_main_unaudit report_main_unauditDal = new Maticsoft.BLL.report_main_unaudit();  //声明对象          
-                Maticsoft.Model.report_main_unaudit main = report_main_unauditDal.GetModel(strReportID);//赋值
-
+                main = report_main_unauditDal.GetModel(strReportID);//赋值
+                if (main == null) { return; }
                 #region 页面上方控件赋值
                 uiSampleNotext.Text = main.SAMPLENO;
                 uiTextBox2.Text = main.SAMPLEType;//样本类型
@@ -138,62 +145,73 @@ namespace BK_LIS.Pages
             fastReport.Load(Application.StartupPath + "\\A4.frx");
 
             Maticsoft.BLL.report_main_unaudit report_main_unauditDal = new Maticsoft.BLL.report_main_unaudit();  //声明对象          
-            Maticsoft.Model.report_main_unaudit main = report_main_unauditDal.GetModel(strReportID);//赋值
-            
-            fastReport.SetParameterValue("SampleNo", main.SAMPLENO);
-            fastReport.SetParameterValue("hosno", main.PAT_NO);
-            fastReport.SetParameterValue("Bedno", main.BED);
-            fastReport.SetParameterValue("PatientName", main.PAT_NAME);
-            fastReport.SetParameterValue("Sex", main.PAT_SEX);
-            fastReport.SetParameterValue("Age", main.PAT_AGE + main.PAT_AGEUnit);
-            fastReport.SetParameterValue("SampleType", main.SAMPLEType);
-            fastReport.SetParameterValue("value", main.DicItemName);
-            fastReport.SetParameterValue("InspectionDepartment", main.PAT_DEPTName);
-            fastReport.SetParameterValue("senderdoctor", main.Send_User);
-            fastReport.SetParameterValue("checkDoctor", main.TEST_User);
-            fastReport.SetParameterValue("checked", main.CHECK_User);
-            fastReport.SetParameterValue("Test Date", main.TEST_DATE);
-            fastReport.SetParameterValue("Report Date", DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"));
-            
-            Maticsoft.BLL.report_detail_undudit report_detailDal = new Maticsoft.BLL.report_detail_undudit();  //声明对象
-            string strWhere = "Report_Id = '" + strReportID + "'";
-            
-            DataTable dt = report_detailDal.GetReportList(strWhere).Tables[0];
+            main = report_main_unauditDal.GetModel(strReportID);//赋值
 
-            DataSet ds = new DataSet();
-            DataTable fr_dt = new DataTable();
-            fr_dt.TableName = "tdResult";
-            fr_dt.Columns.Add("ITEM_EName", typeof(String));//*****列名设置需要与标签模板一致*****
-            fr_dt.Columns.Add("RESULT", typeof(String));//*****列名设置需要与标签模板一致*****
-            fr_dt.Columns.Add("UNIT", typeof(String));//*****列名设置需要与标签模板一致*****
-            fr_dt.Columns.Add("REFRANGE", typeof(String));//*****列名设置需要与标签模板一致*****
-            fr_dt.Columns.Add("Abnormal_flg", typeof(String));//*****列名设置需要与标签模板一致*****
-
-            int Detailcount = int.Parse(ConfigurationManager.AppSettings["SFLCount"].ToString());
-            for (int i = 0; i < dt.Rows.Count; i++)
+            if (main != null) 
             {
-                //Add里面参数的数据顺序要和dt中的列的顺序对应 
-                fastReport.SetParameterValue("SampleType" + i, dt.Rows[i]["ITEM_EName"]);
-                fastReport.SetParameterValue("Result" + i, dt.Rows[i]["RESULT"]);
-                fastReport.SetParameterValue("Unit" + i, dt.Rows[i]["UNIT"]);
-                fastReport.SetParameterValue("Reference" + i, dt.Rows[i]["REFRANGE"]);
-                fastReport.SetParameterValue("prompt" + i, dt.Rows[i]["Abnormal_flg"]);
-            }
-            if (Detailcount - dt.Rows.Count > 0) {
-                for (int i = dt.Rows.Count; i <= Detailcount; i++)
-                {
-                    fastReport.SetParameterValue("SampleType" + i, "");
-                    fastReport.SetParameterValue("Result" + i, "");
-                    fastReport.SetParameterValue("Unit" + i, "");
-                    fastReport.SetParameterValue("Reference" + i, "");
-                    fastReport.SetParameterValue("prompt" + i, "");
-                }
+                fastReport.SetParameterValue("SampleNo", main.SAMPLENO);
+                fastReport.SetParameterValue("hosno", main.PAT_NO);
+                fastReport.SetParameterValue("Bedno", main.BED);
+                fastReport.SetParameterValue("PatientName", main.PAT_NAME);
+                fastReport.SetParameterValue("Sex", main.PAT_SEX);
+                fastReport.SetParameterValue("Age", main.PAT_AGE + main.PAT_AGEUnit);
+                fastReport.SetParameterValue("SampleType", main.SAMPLEType);
+                fastReport.SetParameterValue("value", main.DicItemName);
+                fastReport.SetParameterValue("InspectionDepartment", main.PAT_DEPTName);
+                fastReport.SetParameterValue("senderdoctor", main.Send_User);
+                fastReport.SetParameterValue("checkDoctor", main.TEST_User);
+                fastReport.SetParameterValue("checked", main.CHECK_User);
+                fastReport.SetParameterValue("Test Date", main.TEST_DATE);
+                fastReport.SetParameterValue("Report Date", DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"));
 
+                Maticsoft.BLL.report_detail_undudit report_detailDal = new Maticsoft.BLL.report_detail_undudit();  //声明对象
+                string strWhere = "Report_Id = '" + strReportID + "'";
+
+                DataTable dt = report_detailDal.GetReportList(strWhere).Tables[0];
+
+                DataSet ds = new DataSet();
+                DataTable fr_dt = new DataTable();
+                fr_dt.TableName = "tdResult";
+                fr_dt.Columns.Add("ITEM_EName", typeof(String));//*****列名设置需要与标签模板一致*****
+                fr_dt.Columns.Add("RESULT", typeof(String));//*****列名设置需要与标签模板一致*****
+                fr_dt.Columns.Add("UNIT", typeof(String));//*****列名设置需要与标签模板一致*****
+                fr_dt.Columns.Add("REFRANGE", typeof(String));//*****列名设置需要与标签模板一致*****
+                fr_dt.Columns.Add("Abnormal_flg", typeof(String));//*****列名设置需要与标签模板一致*****
+
+                int Detailcount = int.Parse(ConfigurationManager.AppSettings["SFLCount"].ToString());
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    //Add里面参数的数据顺序要和dt中的列的顺序对应 
+                    fastReport.SetParameterValue("SampleType" + i, dt.Rows[i]["ITEM_EName"]);
+                    fastReport.SetParameterValue("Result" + i, dt.Rows[i]["RESULT"]);
+                    fastReport.SetParameterValue("Unit" + i, dt.Rows[i]["UNIT"]);
+                    fastReport.SetParameterValue("Reference" + i, dt.Rows[i]["REFRANGE"]);
+                    fastReport.SetParameterValue("prompt" + i, dt.Rows[i]["Abnormal_flg"]);
+                }
+                if (Detailcount - dt.Rows.Count > 0)
+                {
+                    for (int i = dt.Rows.Count; i <= Detailcount; i++)
+                    {
+                        fastReport.SetParameterValue("SampleType" + i, "");
+                        fastReport.SetParameterValue("Result" + i, "");
+                        fastReport.SetParameterValue("Unit" + i, "");
+                        fastReport.SetParameterValue("Reference" + i, "");
+                        fastReport.SetParameterValue("prompt" + i, "");
+                    }
+
+                }
+                ds.Tables.Add(fr_dt);
+                fastReport.RegisterData(ds);
+                fastReport.Prepare();
+                fastReport.ShowPrepared();
             }
-            ds.Tables.Add(fr_dt);
-            fastReport.RegisterData(ds);
-            fastReport.Prepare();
-            fastReport.ShowPrepared();
+
         }
+        #region 审核报告
+        private void uiButton3_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
     }
 }

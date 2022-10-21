@@ -674,15 +674,46 @@ namespace Maticsoft.DAL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public DataSet GetLeftList(string strWhere)
+		public DataSet GetLeftList(string strWhere,string FlgAudit)
 		{
 			StringBuilder strSql = new StringBuilder();
-			strSql.Append("select KeyNo_Group,SAMPLENO,PAT_NAME,PAT_SEX, CONCAT(PAT_AGE,PAT_AGEUnit) AS PatAgeNumber ");
-			strSql.Append(" FROM lismain.report_main_unaudit ");
-			if (strWhere.Trim() != "")
+			if (FlgAudit == "")
 			{
-				strSql.Append(" where " + strWhere);
+				
+				strSql.Append("select KeyNo_Group,SAMPLENO,PAT_NAME,PAT_SEX, CONCAT(PAT_AGE,PAT_AGEUnit) AS PatAgeNumber ");
+				strSql.Append(" FROM lismain.report_main A");
+				if (strWhere.Trim() != "")
+				{
+					strSql.Append(" where " + strWhere);
+				}
+				strSql.Append(" UNION ALL ");
+				strSql.Append("select KeyNo_Group,SAMPLENO,PAT_NAME,PAT_SEX, CONCAT(PAT_AGE,PAT_AGEUnit) AS PatAgeNumber ");
+				strSql.Append(" FROM lismain.report_main_unaudit B");
+				if (strWhere.Trim() != "")
+				{
+					strSql.Append(" where " + strWhere);
+				}
 			}
+			else if (FlgAudit == "0")
+			{
+				
+				strSql.Append("select KeyNo_Group,SAMPLENO,PAT_NAME,PAT_SEX, CONCAT(PAT_AGE,PAT_AGEUnit) AS PatAgeNumber ");
+				strSql.Append(" FROM lismain.report_main_unaudit ");
+				if (strWhere.Trim() != "")
+				{
+					strSql.Append(" where " + strWhere);
+				}
+			}
+			else if (FlgAudit == "1") 
+			{				
+				strSql.Append("select KeyNo_Group,SAMPLENO,PAT_NAME,PAT_SEX, CONCAT(PAT_AGE,PAT_AGEUnit) AS PatAgeNumber ");
+				strSql.Append(" FROM lismain.report_main ");
+				if (strWhere.Trim() != "")
+				{
+					strSql.Append(" where " + strWhere);
+				}
+			}
+
 			return DbHelperMySQL.Query(strSql.ToString());
 		}
 

@@ -17,9 +17,9 @@ namespace Maticsoft.BLL
 		/// <summary>
 		/// 是否存在该记录
 		/// </summary>
-		public bool Exists(string ReportID)
+		public bool Exists(string REPORT_ID)
 		{
-			return dal.Exists(ReportID);
+			return dal.Exists(REPORT_ID);
 		}
 
 		/// <summary>
@@ -41,41 +41,41 @@ namespace Maticsoft.BLL
 		/// <summary>
 		/// 删除一条数据
 		/// </summary>
-		public bool Delete(string ReportID)
+		public bool Delete(string REPORT_ID)
 		{
 			
-			return dal.Delete(ReportID);
+			return dal.Delete(REPORT_ID);
 		}
 		/// <summary>
 		/// 删除一条数据
 		/// </summary>
-		public bool DeleteList(string ReportIDlist )
+		public bool DeleteList(string REPORT_IDlist )
 		{
-			return dal.DeleteList(ReportIDlist );
+			return dal.DeleteList(Maticsoft.Common.PageValidate.SafeLongFilter(REPORT_IDlist,0) );
 		}
 
 		/// <summary>
 		/// 得到一个对象实体
 		/// </summary>
-		public Maticsoft.Model.report_main GetModel(string ReportID)
+		public Maticsoft.Model.report_main GetModel(string REPORT_ID)
 		{
 			
-			return dal.GetModel(ReportID);
+			return dal.GetModel(REPORT_ID);
 		}
 
 		/// <summary>
 		/// 得到一个对象实体，从缓存中
 		/// </summary>
-		public Maticsoft.Model.report_main GetModelByCache(string ReportID)
+		public Maticsoft.Model.report_main GetModelByCache(string REPORT_ID)
 		{
 			
-			string CacheKey = "report_mainModel-" + ReportID;
+			string CacheKey = "report_mainModel-" + REPORT_ID;
 			object objModel = Maticsoft.Common.DataCache.GetCache(CacheKey);
 			if (objModel == null)
 			{
 				try
 				{
-					objModel = dal.GetModel(ReportID);
+					objModel = dal.GetModel(REPORT_ID);
 					if (objModel != null)
 					{
 						int ModelCache = Maticsoft.Common.ConfigHelper.GetConfigInt("ModelCache");
@@ -130,14 +130,6 @@ namespace Maticsoft.BLL
 		public DataSet GetAllList()
 		{
 			return GetList("");
-		}
-
-		/// <summary>
-		/// 获得数据列表
-		/// </summary>
-		public DataSet GetLeftList()
-		{
-			return dal.GetLeftList(); 
 		}
 
 		/// <summary>

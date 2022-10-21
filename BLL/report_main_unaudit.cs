@@ -98,9 +98,9 @@ namespace Maticsoft.BLL
 		/// <summary>
 		/// 获得数据列表
 		/// </summary>
-		public DataSet GetLeftList(string strWhere)
+		public DataSet GetLeftList(string strWhere,string FlgAudit)
 		{
-			return dal.GetLeftList(strWhere);
+			return dal.GetLeftList(strWhere,FlgAudit);
 		}
 
 
