@@ -64,6 +64,14 @@ namespace Maticsoft.BLL
 		}
 
 		/// <summary>
+		/// 得到一个对象实体
+		/// </summary>
+		public Maticsoft.Model.report_main GetAuditModel(string REPORT_ID)
+		{
+
+			return dal.GetAuditModel(REPORT_ID);
+		}
+		/// <summary>
 		/// 得到一个对象实体，从缓存中
 		/// </summary>
 		public Maticsoft.Model.report_main_unaudit GetModelByCache(string REPORT_ID)

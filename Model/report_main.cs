@@ -60,6 +60,7 @@ namespace Maticsoft.Model
 		private string _address;
 		private string _telephone;
 		private string _bloodtype;
+		private string _dicItemName;
 		private int? _refgroupid;
 		/// <summary>
 		/// 
@@ -460,6 +461,15 @@ namespace Maticsoft.Model
 		{
 			set{ _bloodtype=value;}
 			get{return _bloodtype;}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public string DicItemName
+		{
+			set { _dicItemName = value; }
+			get { return _dicItemName; }
 		}
 		/// <summary>
 		/// 

@@ -20,7 +20,7 @@ namespace Maticsoft.DAL
 		public bool Exists(string REPORT_ID)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select count(1) from report_main");
+			strSql.Append("select count(1) from lismain.report_main");
 			strSql.Append(" where REPORT_ID=@REPORT_ID ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@REPORT_ID", MySqlDbType.VarChar,255)			};
@@ -36,7 +36,7 @@ namespace Maticsoft.DAL
 		public bool Add(Maticsoft.Model.report_main model)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("insert into report_main(");
+			strSql.Append("insert into lismain.report_main(");
 			strSql.Append("REPORT_ID,RptTypeID,REPORT_NAME,BARCODE,REG_TYPE,CREATE_DATE,BarcodeTime,RegTime,KeyNo_Group,OUT_PAT_ID,PAT_ID,PAT_NO,PAT_IN_HOS_ID,PAT_NAME,PAT_SEX,PAT_AGE,PAT_AGEUnit,PAT_Birthday,PAT_Type,PAT_DEPTID,PAT_DEPTName,ROOM,BED,TestMemo,REQ_NO,REQ_DOC,DoctorID,DoctorName,INSTRUMENT,TEST_DATE,SAMPLENO,SAMPLEType,TestList,TEST_UserID,TEST_User,CHECK_UserID,CHECK_User,REPORT_TIME,HOSPITAL_ID,FALG_Emergency,FLAG_PRINT_LAB,DocMemo,CardNO,PAT_IDCARD,Send_UserID,Send_User,Diagnosis,Address,Telephone,BloodType,RefGroupID)");
 			strSql.Append(" values (");
 			strSql.Append("@REPORT_ID,@RptTypeID,@REPORT_NAME,@BARCODE,@REG_TYPE,@CREATE_DATE,@BarcodeTime,@RegTime,@KeyNo_Group,@OUT_PAT_ID,@PAT_ID,@PAT_NO,@PAT_IN_HOS_ID,@PAT_NAME,@PAT_SEX,@PAT_AGE,@PAT_AGEUnit,@PAT_Birthday,@PAT_Type,@PAT_DEPTID,@PAT_DEPTName,@ROOM,@BED,@TestMemo,@REQ_NO,@REQ_DOC,@DoctorID,@DoctorName,@INSTRUMENT,@TEST_DATE,@SAMPLENO,@SAMPLEType,@TestList,@TEST_UserID,@TEST_User,@CHECK_UserID,@CHECK_User,@REPORT_TIME,@HOSPITAL_ID,@FALG_Emergency,@FLAG_PRINT_LAB,@DocMemo,@CardNO,@PAT_IDCARD,@Send_UserID,@Send_User,@Diagnosis,@Address,@Telephone,@BloodType,@RefGroupID)");
@@ -160,7 +160,7 @@ namespace Maticsoft.DAL
 		public bool Update(Maticsoft.Model.report_main model)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("update report_main set ");
+			strSql.Append("update lismain.report_main set ");
 			strSql.Append("RptTypeID=@RptTypeID,");
 			strSql.Append("REPORT_NAME=@REPORT_NAME,");
 			strSql.Append("BARCODE=@BARCODE,");
@@ -334,7 +334,7 @@ namespace Maticsoft.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("delete from report_main ");
+			strSql.Append("delete from lismain.report_main ");
 			strSql.Append(" where REPORT_ID=@REPORT_ID ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@REPORT_ID", MySqlDbType.VarChar,255)			};
@@ -356,7 +356,7 @@ namespace Maticsoft.DAL
 		public bool DeleteList(string REPORT_IDlist )
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("delete from report_main ");
+			strSql.Append("delete from lismain.report_main ");
 			strSql.Append(" where REPORT_ID in ("+REPORT_IDlist + ")  ");
 			int rows=DbHelperMySQL.ExecuteSql(strSql.ToString());
 			if (rows > 0)
@@ -377,7 +377,7 @@ namespace Maticsoft.DAL
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select REPORT_ID,RptTypeID,REPORT_NAME,BARCODE,REG_TYPE,CREATE_DATE,BarcodeTime,RegTime,KeyNo_Group,OUT_PAT_ID,PAT_ID,PAT_NO,PAT_IN_HOS_ID,PAT_NAME,PAT_SEX,PAT_AGE,PAT_AGEUnit,PAT_Birthday,PAT_Type,PAT_DEPTID,PAT_DEPTName,ROOM,BED,TestMemo,REQ_NO,REQ_DOC,DoctorID,DoctorName,INSTRUMENT,TEST_DATE,SAMPLENO,SAMPLEType,TestList,TEST_UserID,TEST_User,CHECK_UserID,CHECK_User,REPORT_TIME,HOSPITAL_ID,FALG_Emergency,FLAG_PRINT_LAB,DocMemo,CardNO,PAT_IDCARD,Send_UserID,Send_User,Diagnosis,Address,Telephone,BloodType,RefGroupID from report_main ");
+			strSql.Append("select REPORT_ID,RptTypeID,REPORT_NAME,BARCODE,REG_TYPE,CREATE_DATE,BarcodeTime,RegTime,KeyNo_Group,OUT_PAT_ID,PAT_ID,PAT_NO,PAT_IN_HOS_ID,PAT_NAME,PAT_SEX,PAT_AGE,PAT_AGEUnit,PAT_Birthday,PAT_Type,PAT_DEPTID,PAT_DEPTName,ROOM,BED,TestMemo,REQ_NO,REQ_DOC,DoctorID,DoctorName,INSTRUMENT,TEST_DATE,SAMPLENO,SAMPLEType,TestList,TEST_UserID,TEST_User,CHECK_UserID,CHECK_User,REPORT_TIME,HOSPITAL_ID,FALG_Emergency,FLAG_PRINT_LAB,DocMemo,CardNO,PAT_IDCARD,Send_UserID,Send_User,Diagnosis,Address,Telephone,BloodType,RefGroupID from lismain.report_main ");
 			strSql.Append(" where REPORT_ID=@REPORT_ID ");
 			MySqlParameter[] parameters = {
 					new MySqlParameter("@REPORT_ID", MySqlDbType.VarChar,255)			};
@@ -619,7 +619,7 @@ namespace Maticsoft.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select REPORT_ID,RptTypeID,REPORT_NAME,BARCODE,REG_TYPE,CREATE_DATE,BarcodeTime,RegTime,KeyNo_Group,OUT_PAT_ID,PAT_ID,PAT_NO,PAT_IN_HOS_ID,PAT_NAME,PAT_SEX,PAT_AGE,PAT_AGEUnit,PAT_Birthday,PAT_Type,PAT_DEPTID,PAT_DEPTName,ROOM,BED,TestMemo,REQ_NO,REQ_DOC,DoctorID,DoctorName,INSTRUMENT,TEST_DATE,SAMPLENO,SAMPLEType,TestList,TEST_UserID,TEST_User,CHECK_UserID,CHECK_User,REPORT_TIME,HOSPITAL_ID,FALG_Emergency,FLAG_PRINT_LAB,DocMemo,CardNO,PAT_IDCARD,Send_UserID,Send_User,Diagnosis,Address,Telephone,BloodType,RefGroupID ");
-			strSql.Append(" FROM report_main ");
+			strSql.Append(" FROM lismain.report_main ");
 			if(strWhere.Trim()!="")
 			{
 				strSql.Append(" where "+strWhere);
@@ -633,7 +633,7 @@ namespace Maticsoft.DAL
 		public int GetRecordCount(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select count(1) FROM report_main ");
+			strSql.Append("select count(1) FROM lismain.report_main ");
 			if(strWhere.Trim()!="")
 			{
 				strSql.Append(" where "+strWhere);
@@ -664,7 +664,7 @@ namespace Maticsoft.DAL
 			{
 				strSql.Append("order by T.REPORT_ID desc");
 			}
-			strSql.Append(")AS Row, T.*  from report_main T ");
+			strSql.Append(")AS Row, T.*  from lismain.report_main T ");
 			if (!string.IsNullOrEmpty(strWhere.Trim()))
 			{
 				strSql.Append(" WHERE " + strWhere);

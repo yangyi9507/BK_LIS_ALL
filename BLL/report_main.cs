@@ -51,7 +51,7 @@ namespace Maticsoft.BLL
 		/// </summary>
 		public bool DeleteList(string REPORT_IDlist )
 		{
-			return dal.DeleteList(Maticsoft.Common.PageValidate.SafeLongFilter(REPORT_IDlist,0) );
+			return dal.DeleteList(REPORT_IDlist);
 		}
 
 		/// <summary>

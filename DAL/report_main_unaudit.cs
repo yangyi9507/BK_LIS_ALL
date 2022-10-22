@@ -421,6 +421,31 @@ namespace Maticsoft.DAL
 				return false;
 			}
 		}
+		/// <summary>
+		/// 得到一个对象实体
+		/// </summary>
+		public Maticsoft.Model.report_main GetAuditModel(string REPORT_ID)
+		{
+
+			StringBuilder strSql = new StringBuilder();
+			strSql.Append("select REPORT_ID,RptTypeID,REPORT_NAME,BARCODE,REG_TYPE,CREATE_DATE,BarcodeTime,RegTime,KeyNo_Group,OUT_PAT_ID,PAT_ID,PAT_NO,PAT_IN_HOS_ID,PAT_NAME,PAT_SEX,PAT_AGE,PAT_AGEUnit,PAT_Birthday,PAT_Type,PAT_DEPTID,PAT_DEPTName,ROOM,BED,TestMemo,REQ_NO,REQ_DOC,DoctorID,DoctorName,INSTRUMENT,TEST_DATE,SAMPLENO,SAMPLEType,TestList,TEST_UserID,TEST_User,CHECK_UserID,CHECK_User,REPORT_TIME,HOSPITAL_ID,FALG_Emergency,FLAG_PRINT_LAB,DocMemo,CardNO,PAT_IDCARD,Send_UserID,Send_User, Diagnosis,Address,Telephone,BloodType,RefGroupID ,B.DicItemName  from lismain.report_main_unaudit AS  A ");
+			strSql.Append(" LEFT JOIN lismain.classtype AS B ON A.RefGroupID = B.DicItemCode AND DicCode = 4");
+			strSql.Append(" where REPORT_ID=@REPORT_ID ");
+			MySqlParameter[] parameters = {
+					new MySqlParameter("@REPORT_ID", MySqlDbType.VarChar,255)           };
+			parameters[0].Value = REPORT_ID;
+
+			Maticsoft.Model.report_main_unaudit model = new Maticsoft.Model.report_main_unaudit();
+			DataSet ds = DbHelperMySQL.Query(strSql.ToString(), parameters);
+			if (ds.Tables[0].Rows.Count > 0)
+			{
+				return AuditDataRowToModel(ds.Tables[0].Rows[0]);
+			}
+			else
+			{
+				return null;
+			}
+		}
 
 
 		/// <summary>
@@ -449,6 +474,227 @@ namespace Maticsoft.DAL
 			}
 		}
 
+
+		/// <summary>
+		/// 得到一个对象实体
+		/// </summary>
+		public Maticsoft.Model.report_main AuditDataRowToModel(DataRow row)
+		{
+			Maticsoft.Model.report_main model = new Maticsoft.Model.report_main();
+			if (row != null)
+			{
+				if (row["REPORT_ID"] != null)
+				{
+					model.REPORT_ID = row["REPORT_ID"].ToString();
+				}
+				if (row["RptTypeID"] != null && row["RptTypeID"].ToString() != "")
+				{
+					model.RptTypeID = int.Parse(row["RptTypeID"].ToString());
+				}
+				if (row["REPORT_NAME"] != null)
+				{
+					model.REPORT_NAME = row["REPORT_NAME"].ToString();
+				}
+				if (row["BARCODE"] != null)
+				{
+					model.BARCODE = row["BARCODE"].ToString();
+				}
+				if (row["RefGroupID"] != null && row["RefGroupID"].ToString() != "")
+				{
+					model.RefGroupID = int.Parse(row["RefGroupID"].ToString());
+				}
+				if (row["REG_TYPE"] != null && row["REG_TYPE"].ToString() != "")
+				{
+					model.REG_TYPE = int.Parse(row["REG_TYPE"].ToString());
+				}
+				if (row["CREATE_DATE"] != null && row["CREATE_DATE"].ToString() != "")
+				{
+					model.CREATE_DATE = DateTime.Parse(row["CREATE_DATE"].ToString());
+				}
+				if (row["BarcodeTime"] != null && row["BarcodeTime"].ToString() != "")
+				{
+					model.BarcodeTime = DateTime.Parse(row["BarcodeTime"].ToString());
+				}
+				if (row["RegTime"] != null && row["RegTime"].ToString() != "")
+				{
+					model.RegTime = DateTime.Parse(row["RegTime"].ToString());
+				}
+				if (row["KeyNo_Group"] != null)
+				{
+					model.KeyNo_Group = row["KeyNo_Group"].ToString();
+				}
+				if (row["OUT_PAT_ID"] != null)
+				{
+					model.OUT_PAT_ID = row["OUT_PAT_ID"].ToString();
+				}
+				if (row["PAT_ID"] != null)
+				{
+					model.PAT_ID = row["PAT_ID"].ToString();
+				}
+				if (row["PAT_NO"] != null)
+				{
+					model.PAT_NO = row["PAT_NO"].ToString();
+				}
+				if (row["PAT_IN_HOS_ID"] != null)
+				{
+					model.PAT_IN_HOS_ID = row["PAT_IN_HOS_ID"].ToString();
+				}
+				if (row["PAT_NAME"] != null)
+				{
+					model.PAT_NAME = row["PAT_NAME"].ToString();
+				}
+				if (row["PAT_SEX"] != null)
+				{
+					model.PAT_SEX = row["PAT_SEX"].ToString();
+				}
+				if (row["PAT_AGE"] != null)
+				{
+					model.PAT_AGE = row["PAT_AGE"].ToString();
+				}
+				if (row["PAT_AGEUnit"] != null)
+				{
+					model.PAT_AGEUnit = row["PAT_AGEUnit"].ToString();
+				}
+				if (row["PAT_Birthday"] != null)
+				{
+					model.PAT_Birthday = row["PAT_Birthday"].ToString();
+				}
+				if (row["PAT_Type"] != null)
+				{
+					model.PAT_Type = row["PAT_Type"].ToString();
+				}
+				if (row["PAT_DEPTID"] != null)
+				{
+					model.PAT_DEPTID = row["PAT_DEPTID"].ToString();
+				}
+				if (row["PAT_DEPTName"] != null)
+				{
+					model.PAT_DEPTName = row["PAT_DEPTName"].ToString();
+				}
+				if (row["ROOM"] != null)
+				{
+					model.ROOM = row["ROOM"].ToString();
+				}
+				if (row["BED"] != null)
+				{
+					model.BED = row["BED"].ToString();
+				}
+				if (row["TestMemo"] != null)
+				{
+					model.TestMemo = row["TestMemo"].ToString();
+				}
+				if (row["REQ_NO"] != null)
+				{
+					model.REQ_NO = row["REQ_NO"].ToString();
+				}
+				if (row["REQ_DOC"] != null)
+				{
+					model.REQ_DOC = row["REQ_DOC"].ToString();
+				}
+				if (row["DoctorID"] != null)
+				{
+					model.DoctorID = row["DoctorID"].ToString();
+				}
+				if (row["DoctorName"] != null)
+				{
+					model.DoctorName = row["DoctorName"].ToString();
+				}
+				if (row["INSTRUMENT"] != null)
+				{
+					model.INSTRUMENT = row["INSTRUMENT"].ToString();
+				}
+				if (row["TEST_DATE"] != null && row["TEST_DATE"].ToString() != "")
+				{
+					model.TEST_DATE = DateTime.Parse(row["TEST_DATE"].ToString());
+				}
+				if (row["SAMPLENO"] != null)
+				{
+					model.SAMPLENO = row["SAMPLENO"].ToString();
+				}
+				if (row["SAMPLEType"] != null)
+				{
+					model.SAMPLEType = row["SAMPLEType"].ToString();
+				}
+				if (row["TestList"] != null)
+				{
+					model.TestList = row["TestList"].ToString();
+				}
+				if (row["TEST_UserID"] != null)
+				{
+					model.TEST_UserID = row["TEST_UserID"].ToString();
+				}
+				if (row["TEST_User"] != null)
+				{
+					model.TEST_User = row["TEST_User"].ToString();
+				}
+				if (row["CHECK_UserID"] != null)
+				{
+					model.CHECK_UserID = row["CHECK_UserID"].ToString();
+				}
+				if (row["CHECK_User"] != null)
+				{
+					model.CHECK_User = row["CHECK_User"].ToString();
+				}
+				if (row["Send_UserID"] != null)
+				{
+					model.Send_UserID = row["Send_UserID"].ToString();
+				}
+				if (row["Send_User"] != null)
+				{
+					model.Send_User = row["Send_User"].ToString();
+				}
+				if (row["REPORT_TIME"] != null && row["REPORT_TIME"].ToString() != "")
+				{
+					model.REPORT_TIME = DateTime.Parse(row["REPORT_TIME"].ToString());
+				}
+				if (row["HOSPITAL_ID"] != null)
+				{
+					model.HOSPITAL_ID = row["HOSPITAL_ID"].ToString();
+				}
+				if (row["FALG_Emergency"] != null && row["FALG_Emergency"].ToString() != "")
+				{
+					model.FALG_Emergency = int.Parse(row["FALG_Emergency"].ToString());
+				}
+				if (row["FLAG_PRINT_LAB"] != null && row["FLAG_PRINT_LAB"].ToString() != "")
+				{
+					model.FLAG_PRINT_LAB = int.Parse(row["FLAG_PRINT_LAB"].ToString());
+				}
+				if (row["DocMemo"] != null)
+				{
+					model.DocMemo = row["DocMemo"].ToString();
+				}
+				if (row["CardNO"] != null)
+				{
+					model.CardNO = row["CardNO"].ToString();
+				}
+				if (row["PAT_IDCARD"] != null)
+				{
+					model.PAT_IDCARD = row["PAT_IDCARD"].ToString();
+				}
+				if (row["Diagnosis"] != null)
+				{
+					model.Diagnosis = row["Diagnosis"].ToString();
+				}
+				if (row["Address"] != null)
+				{
+					model.Address = row["Address"].ToString();
+				}
+				if (row["Telephone"] != null)
+				{
+					model.Telephone = row["Telephone"].ToString();
+				}
+				if (row["BloodType"] != null)
+				{
+					model.BloodType = row["BloodType"].ToString();
+				}
+				if (row["DicItemName"] != null)
+				{
+					model.DicItemName = row["DicItemName"].ToString();
+				}
+
+			}
+			return model;
+		}
 
 		/// <summary>
 		/// 得到一个对象实体
@@ -680,14 +926,16 @@ namespace Maticsoft.DAL
 			if (FlgAudit == "")
 			{
 				
-				strSql.Append("select KeyNo_Group,SAMPLENO,PAT_NAME,PAT_SEX, CONCAT(PAT_AGE,PAT_AGEUnit) AS PatAgeNumber ");
+				strSql.Append("select KeyNo_Group,SAMPLENO,PAT_NAME,PAT_SEX, CONCAT(PAT_AGE,PAT_AGEUnit) AS PatAgeNumber,1 AS AuditFlg ");
+				strSql.Append(" ,CASE FLAG_PRINT_LAB WHEN '0' THEN '未打印' WHEN '1' THEN '打印' END");
 				strSql.Append(" FROM lismain.report_main A");
 				if (strWhere.Trim() != "")
 				{
 					strSql.Append(" where " + strWhere);
 				}
 				strSql.Append(" UNION ALL ");
-				strSql.Append("select KeyNo_Group,SAMPLENO,PAT_NAME,PAT_SEX, CONCAT(PAT_AGE,PAT_AGEUnit) AS PatAgeNumber ");
+				strSql.Append("select KeyNo_Group,SAMPLENO,PAT_NAME,PAT_SEX, CONCAT(PAT_AGE,PAT_AGEUnit) AS PatAgeNumber,0 AS AuditFlg ");
+				strSql.Append(" ,CASE FLAG_PRINT_LAB WHEN '0' THEN '未打印' WHEN '1' THEN '打印' END");
 				strSql.Append(" FROM lismain.report_main_unaudit B");
 				if (strWhere.Trim() != "")
 				{
@@ -697,7 +945,8 @@ namespace Maticsoft.DAL
 			else if (FlgAudit == "0")
 			{
 				
-				strSql.Append("select KeyNo_Group,SAMPLENO,PAT_NAME,PAT_SEX, CONCAT(PAT_AGE,PAT_AGEUnit) AS PatAgeNumber ");
+				strSql.Append("select KeyNo_Group,SAMPLENO,PAT_NAME,PAT_SEX, CONCAT(PAT_AGE,PAT_AGEUnit) AS PatAgeNumber,0 AS AuditFlg ");
+				strSql.Append(" ,CASE FLAG_PRINT_LAB WHEN '0' THEN '未打印' WHEN '1' THEN '打印' END");
 				strSql.Append(" FROM lismain.report_main_unaudit ");
 				if (strWhere.Trim() != "")
 				{
@@ -706,7 +955,8 @@ namespace Maticsoft.DAL
 			}
 			else if (FlgAudit == "1") 
 			{				
-				strSql.Append("select KeyNo_Group,SAMPLENO,PAT_NAME,PAT_SEX, CONCAT(PAT_AGE,PAT_AGEUnit) AS PatAgeNumber ");
+				strSql.Append("select KeyNo_Group,SAMPLENO,PAT_NAME,PAT_SEX, CONCAT(PAT_AGE,PAT_AGEUnit) AS PatAgeNumber,1 AS AuditFlg ");
+				strSql.Append(" ,CASE FLAG_PRINT_LAB WHEN '0' THEN '未打印' WHEN '1' THEN '打印' END");
 				strSql.Append(" FROM lismain.report_main ");
 				if (strWhere.Trim() != "")
 				{
